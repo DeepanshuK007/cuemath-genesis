@@ -50,7 +50,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream/30 to-cream"></div>
         
         <div className="max-w-6xl mx-auto px-6 text-center relative">
-          <h1 className="text-5xl md:text-8xl font-athletics font-black text-black mb-6 drop-shadow-md tracking-tighter uppercase leading-[0.9]">
+          <h1 className="text-4xl md:text-6xl font-athletics font-black text-black mb-6 drop-shadow-md tracking-tighter uppercase leading-[0.9]">
             Become a<br />
             <span className="text-primary">Cuemath Tutor</span>
           </h1>
