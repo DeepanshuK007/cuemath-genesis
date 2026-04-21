@@ -54,9 +54,8 @@ export default function LandingPage() {
             Become a<br />
             <span className="text-primary">Cuemath Tutor</span>
           </h1>
-          <p className="text-xl md:text-2xl text-dark/80 max-w-3xl mx-auto mb-12 font-sans font-medium drop-shadow-sm leading-relaxed">
-            Transform lives through the power of mathematics. <br className="hidden md:block" />
-            Join our elite community of educators and launch your career in minutes.
+          <p className="text-xl md:text-3xl text-dark/80 max-w-3xl mx-auto mb-12 font-sans font-bold drop-shadow-sm tracking-tight animate-fade-in-up">
+            Transform lives. Teach math. <span className="text-primary">Join the elite.</span>
           </p>
           <Link
             to={isSignedIn ? "/topic" : "/signup"}
@@ -190,6 +189,21 @@ export default function LandingPage() {
           </p>
         </div>
       </footer>
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes fade-in-up {
+          from { 
+            opacity: 0; 
+            transform: translateY(20px); 
+          }
+          to { 
+            opacity: 1; 
+            transform: translateY(0); 
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+      `}} />
     </div>
   )
 }
