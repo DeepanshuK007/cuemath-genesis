@@ -95,25 +95,27 @@ export default function TestimonialLibrary() {
       )}
 
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-6 py-2 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
-            <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
-          </Link>
-          <Link to="/" className="text-gray-600 hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-sans text-sm">
-            Back to Home
+      <header className="bg-white border-b border-gray-100 py-3 px-6">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
+            <div className="h-4 w-[1px] bg-gray-300"></div>
+            <span className="text-[10px] font-black tracking-widest text-black uppercase">Genesis</span>
+          </div>
+          <Link to="/" className="border border-black px-6 py-2 hover:bg-black hover:text-white transition-all text-xs font-black uppercase tracking-widest h-10 flex items-center">
+            Exit Library
           </Link>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="bg-primary py-16">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-4xl font-serif font-bold text-white mb-4">
-            Learning Resources Library
+      <section className="bg-white py-20 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-8 text-center">
+          <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">Elite Resources</span>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-black mb-6">
+            Learning Resources <span className="text-primary italic">Library.</span>
           </h1>
-          <p className="text-xl text-white/80 font-sans max-w-2xl mx-auto">
+          <p className="text-gray-500 font-sans text-lg max-w-2xl mx-auto leading-relaxed">
             Learn from Cuemath's top-rated tutors. Watch how they explain concepts,
             handle challenges, and inspire young minds.
           </p>
@@ -122,38 +124,65 @@ export default function TestimonialLibrary() {
 
       {/* Subscription Banner */}
       {!isSubscribed && (
-        <section className="bg-accent py-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-10"></div>
-          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-48 h-48 rounded-full bg-black opacity-10"></div>
-          
-          <div className="max-w-4xl mx-auto px-6 relative z-10">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-white/10 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
-              <div className="flex-1">
-                <div className="inline-block bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wider">
-                  Limited Time Offer
-                </div>
-                <h3 className="text-3xl font-serif font-bold text-white mb-2">
-                  Pass Your Interview. Guaranteed.
-                </h3>
-                <p className="text-white/90 font-sans text-lg mb-4">
-                  Tutors who study our Premium Library have an <strong className="text-white text-xl">82% higher pass rate</strong>. Don't leave your Cuemath career to chance.
-                </p>
-                <ul className="text-white/80 text-sm font-sans space-y-2 mb-2">
-                  <li className="flex items-center gap-2"><svg className="w-4 h-4 text-green-300" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg> Full Uncensored Interview Recordings</li>
-                  <li className="flex items-center gap-2"><svg className="w-4 h-4 text-green-300" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg> Exact Feedback Reports & Scores</li>
-                  <li className="flex items-center gap-2"><svg className="w-4 h-4 text-green-300" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg> Downloadable Flashcard Decks</li>
-                </ul>
-              </div>
-              <div className="flex flex-col items-center">
-                <button
-                  onClick={handleSubscribe}
-                  disabled={isLoading}
-                  className="bg-white text-accent hover:bg-gray-50 px-8 py-4 rounded-full font-sans font-bold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 whitespace-nowrap mb-3 w-full disabled:opacity-70 disabled:hover:translate-y-0"
-                >
-                  {isLoading ? 'Loading...' : 'Unlock Premium Access'}
-                </button>
-                <span className="text-white/70 text-xs font-sans text-center">Only 14 spots left for this month</span>
-              </div>
+        <section className="py-16 bg-cream">
+          <div className="max-w-5xl mx-auto px-8">
+            <div className="bg-white border-2 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] p-8 md:p-12 relative overflow-hidden">
+               {/* Accent Gradient */}
+               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+               
+               <div className="grid md:grid-cols-[1fr_350px] gap-12 items-center relative z-10">
+                 <div>
+                    <div className="inline-flex items-center gap-2 bg-accent text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest mb-6">
+                      <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                      Limited Time Offer
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-serif font-bold text-black mb-4">
+                      Pass Your Interview. <span className="italic underline decoration-primary decoration-4 underline-offset-4">Guaranteed.</span>
+                    </h2>
+                    <p className="text-gray-600 font-sans text-lg mb-8 leading-relaxed">
+                      Tutors who study our Premium Library have an <span className="text-black font-black bg-primary/10 px-1">82% higher pass rate.</span> Don't leave your Cuemath career to chance.
+                    </p>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {[
+                        "Full Interview Recordings",
+                        "Feedback Reports & Scores",
+                        "Flashcard Deck Access",
+                        "Stress-Test Strategies"
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-center gap-3 text-sm font-bold text-black uppercase tracking-tight">
+                           <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
+                           </svg>
+                           {item}
+                        </div>
+                      ))}
+                    </div>
+                 </div>
+
+                 <div className="bg-gray-50 border-2 border-black p-8 flex flex-col items-center text-center">
+                    <div className="mb-6 w-full">
+                       <div className="flex justify-between text-[10px] font-black uppercase tracking-widest mb-2">
+                          <span>Capacity</span>
+                          <span className="text-accent">14 Spots Left</span>
+                       </div>
+                       <div className="w-full h-2 bg-gray-200">
+                          <div className="h-full bg-accent w-[86%]"></div>
+                       </div>
+                    </div>
+
+                    <button
+                      onClick={handleSubscribe}
+                      disabled={isLoading}
+                      className="w-full bg-black text-white py-5 font-black uppercase tracking-widest text-lg shadow-[6px_6px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all disabled:opacity-50"
+                    >
+                      {isLoading ? 'Processing...' : 'Unlock Premium Access'}
+                    </button>
+                    <p className="mt-4 text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                       Secure Stripe Checkout • Instant Access
+                    </p>
+                 </div>
+               </div>
             </div>
           </div>
         </section>
