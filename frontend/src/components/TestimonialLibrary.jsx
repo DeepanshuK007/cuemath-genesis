@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { API_BASE } from '../services/api'
 
 export default function TestimonialLibrary() {
