@@ -232,7 +232,7 @@ export default function InterviewRoom() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-6xl mx-auto w-full grid md:grid-cols-[280px_1fr] gap-12 p-8">
+      <main className="pt-28 flex-1 max-w-6xl mx-auto w-full grid md:grid-cols-[280px_1fr] gap-12 p-8">
         {/* Left Sidebar: Context */}
         <aside className="space-y-6">
           <div className="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
