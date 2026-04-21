@@ -1,14 +1,21 @@
 import { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import confetti from 'canvas-confetti'
 
 export default function CheckoutSuccess() {
   const [searchParams] = useSearchParams()
   const sessionId = searchParams.get('session_id')
 
   useEffect(() => {
-    // In a real app, we would verify the session ID with the backend
-  }, [sessionId])
+    // Trigger confetti
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#381FF0', '#000000', '#FFD200']
+    })
+  }, [])
 
   return (
     <div className="min-h-screen bg-cream selection:bg-primary selection:text-white flex flex-col">
