@@ -40,19 +40,19 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-32">
+      <section className="relative overflow-hidden py-32 bg-gray-100">
         <video 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="absolute inset-0 w-full h-full object-cover -z-20 opacity-60"
+          className="absolute inset-0 w-full h-full object-cover opacity-90"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-cream/40 to-cream -z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream/20 to-cream"></div>
         
-        <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
+        <div className="max-w-6xl mx-auto px-6 text-center relative">
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 mb-6 drop-shadow-md">
             Become a<br />
             <span className="text-primary">Cuemath Tutor</span>
