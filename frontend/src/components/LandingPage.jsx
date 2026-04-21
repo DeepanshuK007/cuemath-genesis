@@ -10,28 +10,25 @@ export default function LandingPage() {
       <header className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">C</span>
-            </div>
-            <span className="font-sans font-bold text-xl text-gray-800">Cuemath</span>
-            <span className="font-sans text-sm text-primary font-medium ml-1">Genesis</span>
+            <img src="/cuemath-logo.png" alt="Cuemath Logo" className="h-10 w-auto" />
+            <span className="font-sans text-sm text-navy font-bold ml-1 tracking-tight">GENESIS</span>
           </div>
           <nav className="flex gap-6 items-center">
-            <Link to="/testimonials" className="text-gray-600 hover:text-primary transition">
+            <Link to="/testimonials" className="text-navy hover:text-primary transition font-medium">
               Testimonials
             </Link>
             {isSignedIn ? (
               <div className="flex items-center gap-4">
-                <span className="text-sm text-gray-600">Hi, {user?.name || user?.email?.split('@')[0]}</span>
+                <span className="text-sm text-navy">Hi, {user?.name || user?.email?.split('@')[0]}</span>
                 <button
                   onClick={signOut}
-                  className="text-gray-600 hover:text-primary transition font-sans text-sm"
+                  className="text-navy hover:text-primary transition font-sans text-sm"
                 >
                   Sign Out
                 </button>
               </div>
             ) : (
-              <Link to="/signin" className="text-gray-600 hover:text-primary transition">
+              <Link to="/signin" className="text-navy hover:text-primary transition font-medium">
                 Sign In
               </Link>
             )}
@@ -40,7 +37,7 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-32 bg-gray-100">
+      <section className="relative overflow-hidden py-32 bg-cream">
         <video 
           autoPlay 
           loop 
@@ -50,20 +47,20 @@ export default function LandingPage() {
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream/20 to-cream"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream/30 to-cream"></div>
         
         <div className="max-w-6xl mx-auto px-6 text-center relative">
-          <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 mb-6 drop-shadow-md">
+          <h1 className="text-5xl md:text-7xl font-serif font-bold text-navy mb-6 drop-shadow-md">
             Become a<br />
             <span className="text-primary">Cuemath Tutor</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-800 max-w-2xl mx-auto mb-10 font-sans font-medium drop-shadow-sm">
+          <p className="text-xl md:text-2xl text-dark max-w-2xl mx-auto mb-10 font-sans font-medium drop-shadow-sm">
             Teach math, inspire minds. <br className="hidden md:block" />
             Join our elite tutor community in minutes.
           </p>
           <Link
             to={isSignedIn ? "/topic" : "/signup"}
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-sans font-semibold text-lg transition shadow-xl hover:shadow-2xl hover:-translate-y-1"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-navy px-8 py-4 rounded-full font-sans font-bold text-lg transition shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
             {isSignedIn ? "Continue Your Journey" : "Start Your Journey"}
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,42 +73,42 @@ export default function LandingPage() {
       {/* How It Works */}
       <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-serif font-bold text-center text-gray-900 mb-16">
+          <h2 className="text-3xl font-serif font-bold text-center text-navy mb-16">
             How It Works
           </h2>
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-primary">1</span>
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-navy">1</span>
               </div>
-              <h3 className="text-xl font-sans font-semibold text-gray-900 mb-3">
+              <h3 className="text-xl font-sans font-semibold text-navy mb-3">
                 Apply Online
               </h3>
-              <p className="text-gray-600 font-sans">
+              <p className="text-dark font-sans">
                 Fill out a simple form with your details and experience.
                 Takes just 2 minutes.
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-primary">2</span>
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-navy">2</span>
               </div>
-              <h3 className="text-xl font-sans font-semibold text-gray-900 mb-3">
+              <h3 className="text-xl font-sans font-semibold text-navy mb-3">
                 AI Interview
               </h3>
-              <p className="text-gray-600 font-sans">
+              <p className="text-dark font-sans">
                 Have a friendly voice conversation with our AI.
                 Show us your teaching style.
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-primary">3</span>
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-navy">3</span>
               </div>
-              <h3 className="text-xl font-sans font-semibold text-gray-900 mb-3">
+              <h3 className="text-xl font-sans font-semibold text-navy mb-3">
                 Start Teaching
               </h3>
-              <p className="text-gray-600 font-sans">
+              <p className="text-dark font-sans">
                 Get detailed feedback and join our community of
                 exceptional tutors.
               </p>
@@ -121,12 +118,12 @@ export default function LandingPage() {
       </section>
 
       {/* What We Look For */}
-      <section className="py-20">
+      <section className="py-20 bg-cream">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-serif font-bold text-center text-gray-900 mb-4">
+          <h2 className="text-3xl font-serif font-bold text-center text-navy mb-4">
             What We're Looking For
           </h2>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16 font-sans">
+          <p className="text-center text-dark max-w-2xl mx-auto mb-16 font-sans">
             It's not just about knowing math — it's about how you teach it.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -142,7 +139,7 @@ export default function LandingPage() {
                 <h3 className="text-lg font-sans font-semibold text-primary mb-2">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 font-sans text-sm">
+                <p className="text-dark font-sans text-sm">
                   {item.desc}
                 </p>
               </div>
