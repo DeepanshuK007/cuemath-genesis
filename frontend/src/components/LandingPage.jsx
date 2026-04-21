@@ -94,11 +94,11 @@ export default function LandingPage() {
             <span className="inline-block text-[10px] font-black text-black uppercase tracking-[0.5em] mb-6 bg-yellow-400 px-4 py-2">
               Teaching DNA Simulation
             </span>
-            <h1 className="text-6xl md:text-8xl font-serif font-bold text-black leading-tight mb-8">
+            <h1 className="text-6xl md:text-8xl font-serif font-bold text-black leading-[1.1] mb-8 drop-shadow-sm">
               Become a <br />
-              <span className="text-primary italic underline decoration-black decoration-[6px] underline-offset-[12px]">Cuemath Tutor.</span>
+              <span className="text-primary italic underline decoration-black decoration-[8px] underline-offset-[16px]">Cuemath Tutor.</span>
             </h1>
-            <p className="text-xl md:text-2xl font-sans text-gray-800 mb-12 max-w-xl leading-relaxed">
+            <p className="text-xl md:text-2xl font-sans text-black/70 mb-12 max-w-xl leading-relaxed font-medium">
               Transform lives. Teach math. Join the elite network of educators shaping the next generation.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
