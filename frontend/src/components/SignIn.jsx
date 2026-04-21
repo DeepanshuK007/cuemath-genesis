@@ -41,7 +41,7 @@ export default function SignIn() {
       if (response.ok) {
         const data = await response.json()
         signIn(data.user)
-        navigate('/')
+        navigate('/topic')
       } else {
         setError('Google sign-in failed. Please try again.')
       }
