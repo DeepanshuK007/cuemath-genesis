@@ -35,7 +35,7 @@ export default function InterviewRoom() {
 
     // Start intro after a short delay
     const timer = setTimeout(() => {
-      const initialMessage = `Hi ${tutorName}! I'm Alex. My teacher gave me this card: "${topic.title}". ${topic.description} Can you help me?`
+      const initialMessage = `Hi ${tutorName}! I'm Alex. I'm a bit stuck on "${topic.title}". Can you help me understand this?`
       conversationHistory.current.push({ role: 'alex', text: initialMessage })
       setTranscript(prev => [...prev, { role: 'alex', text: initialMessage }])
       handleAISpeak(initialMessage, 'interviewing')
