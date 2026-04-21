@@ -16,6 +16,7 @@ export default function InterviewRoom() {
   const [lastAIMessage, setLastAIMessage] = useState('')
   const [isAITalking, setIsAITalking] = useState(false)
   const [flashcards, setFlashcards] = useState([])
+  const [canEnd, setCanEnd] = useState(false)
   const [error, setError] = useState(null)
   const tutorName = localStorage.getItem('tutorName') || 'Tutor'
 
@@ -131,9 +132,11 @@ export default function InterviewRoom() {
         setTranscript(prev => [...prev, { role: 'alex', text: data.reply }])
         conversationHistory.current.push({ role: 'alex', text: data.reply })
 
-        // Advance stage if backend provides it
-        if (data.stage) setStage(data.stage)
-        if (data.isEnd) setStage('end')
+        if (data.isEnd || data.stage === 'end') {
+          setStage('end')
+          setCanEnd(true)
+          console.log('You can end interview')
+        }
 
         handleAISpeak(data.reply)
       }
@@ -200,8 +203,14 @@ export default function InterviewRoom() {
             <span className="text-[10px] font-black tracking-widest text-black uppercase">Genesis</span>
           </div>
           <button
-            onClick={handleEndInterview}
-            className="border border-black px-4 py-1.5 hover:bg-black hover:text-white transition-all text-[10px] font-black uppercase tracking-widest"
+            onClick={() => {
+              if (canEnd) {
+                handleEndInterview()
+              } else {
+                alert("Please wait for Alex to finish the session before ending.")
+              }
+            }}
+            className={`border border-black px-4 py-1.5 transition-all text-[10px] font-black uppercase tracking-widest ${canEnd ? 'hover:bg-black hover:text-white cursor-pointer' : 'opacity-30 cursor-not-allowed'}`}
           >
             End Session
           </button>
