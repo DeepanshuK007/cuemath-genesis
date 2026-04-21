@@ -1,12 +1,19 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
 
 export default function LandingPage() {
   const navigate = useNavigate()
   const { user, isSignedIn, signOut } = useAuth()
   const videoRef = useRef(null)
+  const [showSignedOut, setShowSignedOut] = useState(false)
+
+  const handleSignOut = () => {
+    signOut()
+    setShowSignedOut(true)
+    setTimeout(() => setShowSignedOut(false), 3000)
+  }
 
   useEffect(() => {
     if (videoRef.current) {
@@ -25,6 +32,27 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-cream selection:bg-primary selection:text-white">
+      {/* Signed Out Popup */}
+      <AnimatePresence>
+        {showSignedOut && (
+          <motion.div 
+            initial={{ y: -100, x: '-50%', opacity: 0 }}
+            animate={{ y: 20, x: '-50%', opacity: 1 }}
+            exit={{ y: -100, x: '-50%', opacity: 0 }}
+            className="fixed top-24 left-1/2 z-[100]"
+          >
+            <div className="bg-black border-2 border-black text-white px-8 py-4 shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] flex items-center gap-4">
+              <div className="w-10 h-10 bg-white border-2 border-black text-black flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              </div>
+              <span className="font-black uppercase tracking-[0.2em] text-[11px]">Successfully Signed Out. Come back soon!</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
@@ -40,7 +68,7 @@ export default function LandingPage() {
           {/* Centered User Badge */}
           <div className="flex justify-center">
             {isSignedIn && (
-               <div className="hidden md:flex items-center gap-3 bg-gray-50 border border-black px-4 h-9">
+               <div className="hidden md:flex items-center gap-3 bg-white border border-black px-4 h-9 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                   <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Signed In As</span>
                   <span className="text-[9px] font-black text-black uppercase tracking-widest">{user?.name || user?.email?.split('@')[0]}</span>
                </div>
@@ -54,7 +82,7 @@ export default function LandingPage() {
             </Link>
             {isSignedIn ? (
               <button
-                onClick={signOut}
+                onClick={handleSignOut}
                 className="text-white bg-black hover:bg-gray-800 border border-black px-6 py-2 transition-all duration-300 font-sans font-bold uppercase text-[10px] tracking-widest h-10 flex items-center"
               >
                 Sign Out
