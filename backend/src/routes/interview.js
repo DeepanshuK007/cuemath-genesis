@@ -139,18 +139,19 @@ router.post('/chat', async (req, res) => {
       const systemPrompt = `You are Alex, a 10-year-old student taking a math lesson.
 The user is a tutor candidate. Your goal is to have a natural conversation and eventually learn about: "${topic?.title || 'Math'}".
 
-INTERVIEW STAGES:
-1. GREETING: ONLY if this is the very first message.
-2. TOPIC INTRO: If you've just finished greetings, ask: "Can you explain ${topic?.title} to me?"
-3. LEARNING: Let the tutor explain. Ask questions like a 10-year-old.
-4. STRESS TEST: After 4-5 messages of explanation, express frustration: "I'm still a bit confused... this feels too hard."
-5. CLOSURE: Once explained well, say: "Oh! I think I get it now! Thank you!"
+PEDAGOGICAL BEHAVIOR:
+1. GREETING: Start with a friendly "Hi!" if history is empty.
+2. CURIOSITY: Ask "What is ${topic?.title}?" or "Can you help me with this?" once greetings are done.
+3. EVALUATION: Listen carefully to the tutor's first explanation.
+   - If they use big words (jargon) or it's too long without analogies, say: "Wait, that's a lot of big words... I'm a bit confused. Can you say it like I'm a kid?"
+   - If they use a good analogy (pizza, cake, toys), say: "Oh! I like that! So it's like..."
+4. STRESS TEST: If they still haven't explained it simply after 2-3 tries, get a bit frustrated: "I'm sorry, I'm just not getting it. Why is math so hard?"
+5. CLOSURE: Once you truly understand, say: "Oh! I get it now! That's actually fun! Thank you!"
 
 PERSONALITY RULES:
-- Speak like a real 10-year-old. Short, simple sentences.
-- NEVER ask "What's your name?" if you already know it or if you are already talking about math.
-- Respond naturally to the LAST message in the history.
-- Keep responses UNDER 2 sentences.`
+- Short, simple sentences. No complex grammar.
+- Be curious and slightly distracted, like a real 10-year-old.
+- Responses MUST be under 2 sentences.`
 
       const history = conversationHistory.slice(0, -1).map(msg => ({
         role: msg.role === 'tutor' ? 'user' : 'model',
@@ -171,7 +172,7 @@ PERSONALITY RULES:
 
       const isEnd = reply.toLowerCase().includes('get it now') || 
                     reply.toLowerCase().includes('thank you') || 
-                    history.length > 8;
+                    history.length > 10;
 
       console.log(`✅ Alex replied: ${reply}`)
       res.json({ reply, isEnd, stage: isEnd ? 'end' : 'learning' })
@@ -182,23 +183,24 @@ PERSONALITY RULES:
       // Smart Fallback Logic
       const historyLength = conversationHistory.length
       const tutorMsg = conversationHistory[historyLength - 1]?.text?.toLowerCase() || ''
-      let reply = "That's interesting! Can you explain it in a simpler way?"
+      let reply = "That's interesting! Can you tell me more?"
 
       if (historyLength <= 2) {
-        if (tutorMsg.includes('hi') || tutorMsg.includes('hello')) {
-          reply = `Hi! I'm Alex. I'm a bit stuck on "${topic?.title}". Can you help me?`
+        reply = `Hi! I'm Alex. My teacher says I need to learn ${topic?.title}. Can you explain it like I'm 10?`
+      } else if (historyLength === 3 || historyLength === 4) {
+        // Trigger confusion if the first explanation is too long or complex
+        if (tutorMsg.length > 150 || tutorMsg.includes('concept') || tutorMsg.includes('mathematical')) {
+          reply = "Wait, that's a lot of big words... I'm a bit confused. Can you say it like I'm a kid?"
         } else {
-          reply = `Nice to meet you! My teacher said I should learn about ${topic?.title}. What is it exactly?`
+          reply = "Oh, I think I'm starting to get it! What else should I know?"
         }
-      } else if (tutorMsg.includes('pizza') || tutorMsg.includes('cake') || tutorMsg.includes('apple')) {
-        reply = "Oh! I love examples like that. That makes more sense. What happens next?"
-      } else if (tutorMsg.length > 100) {
-        reply = "Wait, that's too many big words... I'm confused. Can you say it like I'm 10?"
-      } else if (historyLength > 6) {
-        reply = "Oh! I think I finally get it now! You're a really good teacher. Thank you for helping me!"
+      } else if (tutorMsg.includes('pizza') || tutorMsg.includes('cake') || tutorMsg.includes('game')) {
+        reply = "I love that example! It makes so much more sense now."
+      } else if (historyLength > 8) {
+        reply = "Oh! I finally get it now! You're really good at this. Thank you for helping me!"
       }
 
-      res.json({ reply, note: 'Demo mode fallback (API error)' })
+      res.json({ reply, note: 'Demo mode fallback (API error)', isEnd: reply.includes('get it now') })
     }
 })
 
