@@ -55,6 +55,16 @@ export default function TopicAssignment() {
 
       {/* Topic Assignment */}
       <main className="max-w-xl mx-auto px-6 py-12">
+        <button 
+          onClick={() => navigate('/')}
+          className="mb-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Go Back
+        </button>
+
         <div className="bg-white rounded-none border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-10 mb-10">
           <div className="mb-8">
             <span className="inline-block bg-primary text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest mb-4">
