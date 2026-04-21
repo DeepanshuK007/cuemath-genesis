@@ -134,7 +134,8 @@ export default function InterviewRoom() {
       }
     } catch (err) {
       console.error('Chat error:', err)
-      setError('Alex got disconnected. Please try speaking again.')
+      const msg = err.message || 'Alex got disconnected.'
+      setError(`Error: ${msg}. Check if your API Key is valid in the backend .env file.`)
     } finally {
       setIsTranscribing(false)
     }
