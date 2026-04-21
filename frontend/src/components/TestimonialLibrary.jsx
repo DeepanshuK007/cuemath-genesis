@@ -313,8 +313,8 @@ export default function TestimonialLibrary() {
                           </span>
                           {isLoading && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black">
-                              <span className="text-[8px] mb-2 animate-pulse">Processing...</span>
-                              <div className="w-24 h-1.5 bg-gray-800 border border-gray-700 overflow-hidden">
+                              <span className="text-[8px] mb-2 animate-pulse text-gray-400">Processing Payment...</span>
+                              <div className="w-24 h-1.5 bg-gray-800 border border-gray-700 overflow-hidden mb-2">
                                 <motion.div 
                                   initial={{ x: '-100%' }}
                                   animate={{ x: '0%' }}
@@ -322,6 +322,9 @@ export default function TestimonialLibrary() {
                                   className="w-full h-full bg-primary"
                                 />
                               </div>
+                              <span className="text-[7px] font-bold text-red-500 uppercase tracking-widest animate-pulse">
+                                Do not refresh or go back
+                              </span>
                             </div>
                           )}
                         </button>
