@@ -92,13 +92,13 @@ export default function TestimonialLibrary() {
             exit={{ y: -100, x: '-50%', opacity: 0 }}
             className="fixed top-24 left-1/2 z-50"
           >
-            <div className="bg-green-500 border-2 border-black text-white px-8 py-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center gap-4">
-              <div className="w-10 h-10 bg-white border-2 border-black text-green-500 flex items-center justify-center">
+            <div className="bg-primary border-2 border-black text-black px-8 py-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center gap-4">
+              <div className="w-10 h-10 bg-black text-white border-2 border-black flex items-center justify-center">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span className="font-black uppercase tracking-widest text-sm">Payment Successful! Library Unlocked.</span>
+              <span className="font-black uppercase tracking-[0.2em] text-[11px]">Payment Successful! Library Unlocked.</span>
             </div>
           </motion.div>
         )}
