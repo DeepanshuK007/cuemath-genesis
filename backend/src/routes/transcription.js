@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import multer from 'multer'
-import path from 'path'
-import OpenAI, { toFile } from 'openai'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
 const router = Router()
 
@@ -20,7 +19,7 @@ const upload = multer({
   }
 })
 
-// POST /api/transcription/transcribe - Transcribe audio using Whisper
+// POST /api/transcription/transcribe - Transcribe audio using Gemini 1.5 Flash
 router.post('/transcribe', upload.single('audio'), async (req, res) => {
   const startTime = Date.now()
 
@@ -31,41 +30,40 @@ router.post('/transcribe', upload.single('audio'), async (req, res) => {
 
     console.log(`📁 Audio file received: ${req.file.size} bytes, type: ${req.file.mimetype}`)
 
-    if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === 'sk-your-api-key-here') {
-      console.log('❌ OpenAI API key not configured')
-      return res.status(500).json({ error: 'OpenAI API key not configured. Please add your key to the .env file.' })
+    if (!process.env.GEMINI_API_KEY) {
+      console.log('❌ Gemini API key not configured')
+      return res.status(500).json({ error: 'Gemini API key not configured.' })
     }
 
-    // Create OpenAI client lazily (after dotenv loads)
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
-    })
+    // Initialize Gemini
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
 
-    // Create a buffer from the audio data
-    const buffer = Buffer.from(req.file.buffer)
-    console.log(`🎙️ Sending to Whisper... (${buffer.length} bytes)`)
+    console.log(`🎙️ Sending to Gemini for transcription... (${req.file.size} bytes)`)
 
-    const file = await toFile(buffer, `audio.${req.file.mimetype.split('/')[1] || 'webm'}`, { type: req.file.mimetype });
+    const result = await model.generateContent([
+      {
+        inlineData: {
+          data: req.file.buffer.toString('base64'),
+          mimeType: req.file.mimetype
+        }
+      },
+      "Transcribe the audio exactly. If it's a math lesson, ensure technical terms are spelled correctly. Return ONLY the transcription text, nothing else."
+    ])
 
-    // Transcribe using Whisper
-    const transcription = await openai.audio.transcriptions.create({
-      file,
-      model: 'whisper-1',
-      language: 'en'
-    })
-
+    const text = result.response.text()
     const elapsed = Date.now() - startTime
-    console.log(`🎙️ Whisper transcribed in ${elapsed}ms: "${transcription.text}"`)
+    console.log(`🎙️ Gemini transcribed in ${elapsed}ms: "${text}"`)
 
     res.json({
-      text: transcription.text,
+      text: text,
       success: true,
       elapsed
     })
 
   } catch (error) {
     const elapsed = Date.now() - startTime
-    console.error(`❌ Whisper error after ${elapsed}ms:`, error.message)
+    console.error(`❌ Transcription error after ${elapsed}ms:`, error.message)
     res.status(500).json({ error: 'Transcription failed', details: error.message })
   }
 })
