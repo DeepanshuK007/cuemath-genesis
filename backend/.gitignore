@@ -17,6 +17,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# Database
+database.sqlite
+database.sqlite-journal
 # Logs
 *.log
 npm-debug.log*

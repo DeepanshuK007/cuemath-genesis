@@ -46,20 +46,20 @@ export default function LandingPage() {
           loop 
           muted 
           playsInline 
-          className="absolute inset-0 w-full h-full object-cover -z-20 opacity-40 mix-blend-multiply"
+          className="absolute inset-0 w-full h-full object-cover -z-20 opacity-60"
         >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-particle-background-3134-large.mp4" type="video/mp4" />
+          <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-cream/80 to-cream -z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-cream/40 to-cream -z-10"></div>
         
         <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 mb-6 drop-shadow-md">
             Become a<br />
             <span className="text-primary">Cuemath Tutor</span>
           </h1>
-          <p className="text-xl text-gray-800 max-w-2xl mx-auto mb-10 font-sans font-medium drop-shadow-sm">
-            Share your passion for teaching. Help students love math.
-            Our AI-powered screening makes joining quick and easy.
+          <p className="text-xl md:text-2xl text-gray-800 max-w-2xl mx-auto mb-10 font-sans font-medium drop-shadow-sm">
+            Teach math, inspire minds. <br className="hidden md:block" />
+            Join our elite tutor community in minutes.
           </p>
           <Link
             to={isSignedIn ? "/topic" : "/signup"}

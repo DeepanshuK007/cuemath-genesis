@@ -25,7 +25,7 @@ export default function TestimonialLibrary() {
         rating: 4.8,
         views: '1,204',
         trending: true,
-        image: '/images/priya.jpeg',
+        image: '/images/tamanna.jpeg',
         preview: 'She used pizza examples perfectly...',
         fullTranscript: 'So imagine you have a pizza, and you share it with your friend...',
         cliffhanger: 'The exact phrase Priya used to make fractions click instantly...',
