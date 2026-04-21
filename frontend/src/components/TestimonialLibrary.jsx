@@ -28,7 +28,7 @@ export default function TestimonialLibrary() {
         image: '/images/tamanna.jpeg',
         preview: 'She used pizza examples perfectly...',
         fullTranscript: 'So imagine you have a pizza, and you share it with your friend...',
-        cliffhanger: 'The exact phrase Priya used to make fractions click instantly...',
+        cliffhanger: 'The exact phrase Tamanna used to make fractions click instantly...',
       },
       {
         id: 2,
@@ -188,10 +188,10 @@ export default function TestimonialLibrary() {
         </section>
       )}      {/* Testimonials Grid */}
       <main className="max-w-6xl mx-auto px-8 py-20">
-        <div className="flex items-center gap-4 mb-12">
-           <div className="h-8 w-2 bg-primary"></div>
-           <h2 className="text-3xl font-serif font-bold text-black uppercase tracking-tight">
-             Featured Tutorials
+        <div className="text-center mb-16">
+           <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">The Gallery</span>
+           <h2 className="text-4xl md:text-5xl font-serif font-bold text-black uppercase tracking-tight">
+             Featured <span className="text-primary italic">Tutorials</span>
            </h2>
         </div>
 
