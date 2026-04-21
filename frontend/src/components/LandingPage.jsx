@@ -154,30 +154,33 @@ export default function LandingPage() {
       </section>
 
       {/* What We Look For */}
-      <section className="py-20 bg-cream">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-serif font-bold text-center text-black mb-4">
-            What We're Looking For
-          </h2>
-          <p className="text-center text-dark max-w-2xl mx-auto mb-16 font-sans">
-            It's not just about knowing math — it's about how you teach it.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-32 bg-cream/30">
+        <div className="max-w-6xl mx-auto px-8">
+          <div className="text-center mb-20">
+            <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">The DNA</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-black mb-6">
+              What we're <span className="text-primary italic">looking for.</span>
+            </h2>
+            <p className="text-gray-500 font-sans text-lg max-w-2xl mx-auto">
+              It's not just about knowing math—it's about the <span className="text-black font-bold">art of teaching it.</span>
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: 'Warmth', desc: 'Do you make students feel supported and encouraged?' },
-              { title: 'Clarity', desc: 'Can you explain complex ideas in simple ways?' },
-              { title: 'Patience', desc: 'Do you stay calm when students struggle?' },
-              { title: 'Simplicity', desc: 'Do you avoid jargon and use relatable examples?' },
-              { title: 'Fluency', desc: 'Can you communicate clearly in English?' },
-              { title: 'Passion', desc: 'Do you genuinely love helping students learn?' },
-            ].map((item) => (
-              <div key={item.title} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                <h3 className="text-lg font-sans font-semibold text-primary mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-dark font-sans text-sm">
-                  {item.desc}
-                </p>
+              { title: "Warmth", desc: "Do you make students feel supported and encouraged?", icon: "❤️" },
+              { title: "Clarity", desc: "Can you explain complex ideas in simple ways?", icon: "💎" },
+              { title: "Patience", desc: "Do you stay calm when students struggle?", icon: "🧘" },
+              { title: "Simplicity", desc: "Do you avoid jargon and use relatable examples?", icon: "🧩" },
+              { title: "Fluency", desc: "Can you communicate clearly and confidently?", icon: "🗣️" },
+              { title: "Passion", desc: "Do you genuinely love helping students grow?", icon: "🔥" }
+            ].map((item, i) => (
+              <div key={i} className="group bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div className="text-3xl mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-sans font-bold text-black mb-3">{item.title}</h3>
+                <p className="text-gray-500 font-sans text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
