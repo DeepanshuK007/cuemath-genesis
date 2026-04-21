@@ -78,11 +78,11 @@ export default function LandingPage() {
           playsInline
           preload="auto"
           poster="/hero-poster.png"
-          className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2]"
+          className="absolute inset-0 w-full h-full object-cover z-0 grayscale-[0.2] opacity-60"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-cream z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/30 to-cream z-10"></div>
         
         <div className="max-w-7xl mx-auto px-8 relative z-20 w-full text-center">
           <motion.div 
