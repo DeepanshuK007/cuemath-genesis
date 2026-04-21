@@ -1,3 +1,9 @@
+import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+
+export default function LandingPage() {
+  const { user, isSignedIn, signOut } = useAuth()
+
   return (
     <div className="min-h-screen bg-cream font-sans text-slate overflow-hidden">
       {/* Header */}
@@ -172,3 +178,4 @@
       `}} />
     </div>
   )
+}
