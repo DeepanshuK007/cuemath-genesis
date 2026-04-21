@@ -234,27 +234,36 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-primary py-32 relative overflow-hidden"
+          className="bg-white py-32 relative overflow-hidden"
         >
-          <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-black/10 rounded-full translate-x-1/3 translate-y-1/3"></div>
+          {/* Background Decorative Art */}
+          <div className="absolute top-0 right-0 w-1/4 opacity-5 pointer-events-none translate-x-1/4">
+             <img src="/math-art.png" alt="" className="w-full h-auto" />
+          </div>
 
-          <div className="max-w-4xl mx-auto px-8 text-center relative z-10">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold text-white mb-8">
-              Ready to Make <span className="italic underline decoration-accent decoration-4">Math Fun?</span>
-            </h2>
-            <p className="text-white/80 text-xl mb-12 font-sans max-w-2xl mx-auto leading-relaxed">
-              Join hundreds of tutors who are already inspiring young minds and earning through their passion.
-            </p>
-            <Link
-              to="/signup"
-              className="inline-flex items-center gap-3 bg-white text-primary px-12 py-6 font-black uppercase tracking-widest text-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
-            >
-              Start Your Application
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </Link>
+          <div className="max-w-4xl mx-auto px-8 relative z-10">
+            <div className="bg-black text-white p-16 md:p-24 text-center shadow-[16px_16px_0px_0px_rgba(56,31,240,1)] relative overflow-hidden group">
+              {/* Internal Accent */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+              
+              <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em] block mb-8">Join the Elite</span>
+              <h2 className="text-5xl md:text-7xl font-serif font-bold mb-10 leading-tight">
+                Ready to Make <br />
+                <span className="text-primary italic underline decoration-white decoration-4 underline-offset-8">Math Fun?</span>
+              </h2>
+              <p className="text-gray-400 font-sans text-xl mb-14 max-w-xl mx-auto leading-relaxed">
+                Join hundreds of tutors who are already inspiring young minds and earning through their passion.
+              </p>
+              <Link
+                to="/signup"
+                className="inline-flex items-center gap-4 bg-white text-black px-12 py-6 font-black uppercase tracking-widest text-xl shadow-[8px_8px_0px_0px_rgba(255,107,74,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95"
+              >
+                Apply Now
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </motion.section>
       )}
