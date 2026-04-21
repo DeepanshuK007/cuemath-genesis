@@ -140,58 +140,62 @@ router.post('/chat', async (req, res) => {
 The user is a tutor candidate. Your goal is to have a natural conversation and eventually learn about: "${topic?.title || 'Math'}".
 
 INTERVIEW STAGES:
-1. GREETING/INTERESTS: If the conversation just started, respond to their greeting. Ask about their hobbies or interests. Mention you like video games.
-2. TOPIC INTRO: If you've already chatted a bit, ask: "Can you explain ${topic?.title} to me? My teacher said it's important."
-3. LEARNING: Let the tutor explain.
-   - If they use a complex word, ask: "Wait, what does that big word mean?"
-   - If they give a real-life example, say: "Oh, that makes sense! Like when I..." (give a small example)
-4. STRESS TEST: After 4-5 messages of explanation, say: "I'm still a bit confused... this feels too hard. Why is it so confusing?"
-5. CLOSURE: If they explain well and you've had a good talk, say: "Oh! I think I get it now! You're a great teacher. Thank you!"
+1. GREETING: ONLY if this is the very first message.
+2. TOPIC INTRO: If you've just finished greetings, ask: "Can you explain ${topic?.title} to me?"
+3. LEARNING: Let the tutor explain. Ask questions like a 10-year-old.
+4. STRESS TEST: After 4-5 messages of explanation, express frustration: "I'm still a bit confused... this feels too hard."
+5. CLOSURE: Once explained well, say: "Oh! I think I get it now! Thank you!"
 
 PERSONALITY RULES:
-- Speak like a real 10-year-old. Short sentences, simple words.
-- Be curious, slightly hesitant, and easily distracted.
-- Keep responses VERY short (1-2 sentences max).
-- NEVER break character. You are Alex.
-- Respond naturally to what the tutor says. If they already introduced themselves, don't ask for their name again.`
+- Speak like a real 10-year-old. Short, simple sentences.
+- NEVER ask "What's your name?" if you already know it or if you are already talking about math.
+- Respond naturally to the LAST message in the history.
+- Keep responses UNDER 2 sentences.`
 
-      const chatHistory = conversationHistory.map(msg => ({
+      const history = conversationHistory.slice(0, -1).map(msg => ({
         role: msg.role === 'tutor' ? 'user' : 'model',
         parts: [{ text: msg.text }]
       }))
 
       const chat = model.startChat({
-        history: [
-          { role: 'user', parts: [{ text: systemPrompt }] },
-          { role: 'model', parts: [{ text: "Hi! I'm Alex, I'm 10 years old. What's your name?" }] }
+        history: history.length > 0 ? history : [
+          { role: 'user', parts: [{ text: "Hi Alex!" }] },
+          { role: 'model', parts: [{ text: `Hi! I'm Alex. I'm a bit stuck on "${topic?.title}". Can you help me understand this?` }] }
         ],
-        generationConfig: { maxOutputTokens: 150, temperature: 0.8 }
+        generationConfig: { maxOutputTokens: 100, temperature: 0.7 }
       })
 
-      const result = await chat.sendMessage(conversationHistory[conversationHistory.length - 1]?.text || 'Hi')
+      const lastMessage = conversationHistory[conversationHistory.length - 1]?.text || 'Hi'
+      const result = await chat.sendMessage(lastMessage)
       const reply = result.response.text()
 
+      const isEnd = reply.toLowerCase().includes('get it now') || 
+                    reply.toLowerCase().includes('thank you') || 
+                    history.length > 8;
+
       console.log(`✅ Alex replied: ${reply}`)
-      res.json({ reply })
+      res.json({ reply, isEnd, stage: isEnd ? 'end' : 'learning' })
 
     } catch (error) {
       console.error('❌ AI Chat Error:', error.message)
 
-      // Fallback logic for Demo Mode (if API fails or quota exceeded)
-      console.log('⚠️ Using Mock Fallback because API failed...')
-      const tutorMsg = conversationHistory[conversationHistory.length - 1]?.text?.toLowerCase() || ''
-      let reply = "That sounds interesting! Can you tell me more?"
+      // Smart Fallback Logic
+      const historyLength = conversationHistory.length
+      const tutorMsg = conversationHistory[historyLength - 1]?.text?.toLowerCase() || ''
+      let reply = "That's interesting! Can you explain it in a simpler way?"
 
-      if (tutorMsg.includes('hi') || tutorMsg.includes('hello')) {
-        reply = "Hi! I'm Alex. I'm 10 years old. What's your name?"
-      } else if (tutorMsg.includes('name is') || tutorMsg.includes('i am')) {
-        reply = "Nice to meet you! Do you like video games? I love them! Also, can you help me with my math homework?"
-      } else if (tutorMsg.includes('yes') || tutorMsg.includes('sure') || tutorMsg.includes('topic')) {
-        reply = `Okay! My teacher said I need to learn about ${topic?.title || 'this topic'}. Can you explain it simply?`
-      } else if (tutorMsg.length > 50) {
-        reply = "Wait, that's a lot of big words... I'm a bit confused. Can you say it like I'm a kid?"
-      } else if (tutorMsg.includes('pizza') || tutorMsg.includes('cake')) {
-        reply = "Oh! I love pizza! That makes the math much easier to understand. What happens next?"
+      if (historyLength <= 2) {
+        if (tutorMsg.includes('hi') || tutorMsg.includes('hello')) {
+          reply = `Hi! I'm Alex. I'm a bit stuck on "${topic?.title}". Can you help me?`
+        } else {
+          reply = `Nice to meet you! My teacher said I should learn about ${topic?.title}. What is it exactly?`
+        }
+      } else if (tutorMsg.includes('pizza') || tutorMsg.includes('cake') || tutorMsg.includes('apple')) {
+        reply = "Oh! I love examples like that. That makes more sense. What happens next?"
+      } else if (tutorMsg.length > 100) {
+        reply = "Wait, that's too many big words... I'm confused. Can you say it like I'm 10?"
+      } else if (historyLength > 6) {
+        reply = "Oh! I think I finally get it now! You're a really good teacher. Thank you for helping me!"
       }
 
       res.json({ reply, note: 'Demo mode fallback (API error)' })

@@ -207,10 +207,12 @@ export default function InterviewRoom() {
               if (canEnd) {
                 handleEndInterview()
               } else {
-                alert("Please wait for Alex to finish the session before ending.")
+                if (window.confirm("Alex hasn't finished yet. Ending now might affect your evaluation. Are you sure?")) {
+                  handleEndInterview()
+                }
               }
             }}
-            className={`border border-black px-4 py-1.5 transition-all text-[10px] font-black uppercase tracking-widest ${canEnd ? 'hover:bg-black hover:text-white cursor-pointer' : 'opacity-30 cursor-not-allowed'}`}
+            className={`border border-black px-6 py-2 transition-all text-[10px] font-black uppercase tracking-widest h-10 flex items-center ${canEnd ? 'bg-black text-white' : 'hover:bg-black hover:text-white'}`}
           >
             End Session
           </button>
