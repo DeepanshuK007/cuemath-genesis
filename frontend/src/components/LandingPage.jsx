@@ -308,7 +308,7 @@ export default function LandingPage() {
 
           <div className="text-center md:text-right">
             <p className="text-gray-500 font-sans text-sm font-medium leading-relaxed">
-              Built with Passion by <span className="text-white font-black italic">Deepanshu</span>
+              Engineered with the <span className="text-white font-black italic">Pedagogical DNA</span> of Deepanshu Kumar
             </p>
           </div>
         </div>
