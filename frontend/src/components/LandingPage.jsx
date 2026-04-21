@@ -60,7 +60,7 @@ export default function LandingPage() {
           </p>
           <Link
             to={isSignedIn ? "/topic" : "/signup"}
-            className="group relative overflow-hidden inline-flex items-center gap-2 bg-primary text-black px-10 py-5 rounded-none font-sans font-bold text-xl transition-all duration-500 shadow-xl hover:shadow-2xl"
+            className="group relative overflow-hidden inline-flex items-center gap-2 bg-primary text-black px-10 py-5 rounded-none font-untitled font-semibold text-xl transition-all duration-500 shadow-xl hover:shadow-2xl"
           >
             {/* Door animation panels */}
             <span className="absolute inset-y-0 left-0 w-[51%] bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
