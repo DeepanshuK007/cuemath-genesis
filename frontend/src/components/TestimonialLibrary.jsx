@@ -297,7 +297,7 @@ export default function TestimonialLibrary() {
                         <button
                           onClick={handleSubscribe}
                           disabled={isLoading}
-                          className="bg-black text-white px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em] shadow-[4px_4px_0px_0px_rgba(255,107,74,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all disabled:opacity-50"
+                          className="bg-black text-white px-10 py-4 text-[11px] font-black uppercase tracking-[0.2em] shadow-[6px_6px_0px_0px_rgba(255,107,74,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all disabled:opacity-50"
                         >
                           {isLoading ? 'Wait...' : 'Unlock Content'}
                         </button>
