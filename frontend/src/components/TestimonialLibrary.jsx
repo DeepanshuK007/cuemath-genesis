@@ -111,7 +111,7 @@ export default function TestimonialLibrary() {
             {isSubscribed && (
                <div className="hidden md:flex items-center gap-3 bg-gray-50 border border-black px-4 h-9">
                   <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Premium Member</span>
-                  <span className="text-[9px] font-black text-black uppercase tracking-widest italic">Priya</span>
+                  <span className="text-[9px] font-black text-black uppercase tracking-widest italic">{localStorage.getItem('tutorName') || 'Tutor'}</span>
                </div>
             )}
           </div>
@@ -216,8 +216,15 @@ export default function TestimonialLibrary() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {testimonials.map(tutorial => (
-            <div key={tutorial.id} className="group bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(56,31,240,1)] transition-all duration-300 flex flex-col">
+          {testimonials.map((tutorial, i) => (
+            <motion.div 
+              key={tutorial.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(56,31,240,1)] transition-all duration-300 flex flex-col"
+            >
               {/* Video Placeholder */}
               <div className="aspect-video bg-gray-100 relative overflow-hidden border-b-2 border-black">
                 <img
@@ -298,10 +305,9 @@ export default function TestimonialLibrary() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-div>
 
         {/* Empty State */}
         {testimonials.length === 0 && (
