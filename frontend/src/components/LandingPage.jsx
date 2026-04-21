@@ -43,7 +43,9 @@ export default function LandingPage() {
           loop 
           muted 
           playsInline 
-          className="absolute inset-0 w-full h-full object-cover opacity-90"
+          preload="auto"
+          poster="/hero-poster.png"
+          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-opacity duration-1000"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
