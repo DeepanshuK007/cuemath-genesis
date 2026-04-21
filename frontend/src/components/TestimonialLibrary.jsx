@@ -186,107 +186,102 @@ export default function TestimonialLibrary() {
             </div>
           </div>
         </section>
-      )}
+      )}      {/* Testimonials Grid */}
+      <main className="max-w-6xl mx-auto px-8 py-20">
+        <div className="flex items-center gap-4 mb-12">
+           <div className="h-8 w-2 bg-primary"></div>
+           <h2 className="text-3xl font-serif font-bold text-black uppercase tracking-tight">
+             Featured Tutorials
+           </h2>
+        </div>
 
-      {/* Testimonials Grid */}
-      <main className="max-w-6xl mx-auto px-6 py-12">
-        <h2 className="text-2xl font-serif font-bold text-gray-900 mb-8">
-          Featured Tutorials
-        </h2>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {testimonials.map(tutorial => (
-            <div key={tutorial.id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            <div key={tutorial.id} className="group bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(56,31,240,1)] transition-all duration-300 flex flex-col">
               {/* Video Placeholder */}
-              <div className="aspect-video bg-gray-200 relative overflow-hidden">
+              <div className="aspect-video bg-gray-100 relative overflow-hidden border-b-2 border-black">
                 <img
                   src={tutorial.image}
                   alt={tutorial.tutorName}
-                  className={`w-full h-full object-cover ${
+                  className={`w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ${
                     tutorial.tutorName === 'Ananya Patel' ? 'object-[50%_20%]' : 
                     tutorial.tutorName === 'Tamanna Kothari' ? 'object-[50%_35%]' : 
                     'object-center'
                   }`}
                 />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition">
-                    <svg className="w-6 h-6 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white border-2 border-black rounded-none flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer group-hover:bg-primary group-hover:text-white transition-all">
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </div>
                 </div>
-                <div className="absolute top-3 right-3 bg-black/70 text-white text-xs font-sans px-2 py-1 rounded">
+                <div className="absolute top-4 right-4 bg-black text-white text-[10px] font-black px-2 py-1 uppercase tracking-widest">
                   5:32
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-5">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <svg
-                        key={i}
-                        className={`w-4 h-4 ${i < Math.floor(tutorial.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                    <span className="text-sm font-sans font-medium text-gray-600 ml-1">{tutorial.rating}</span>
+              <div className="p-8 flex-1 flex flex-col">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-1 bg-gray-50 border border-black px-2 py-1">
+                    <span className="text-yellow-500">★</span>
+                    <span className="text-xs font-black text-black uppercase">{tutorial.rating}</span>
                   </div>
                   {tutorial.trending && (
-                    <div className="flex items-center gap-1 text-xs font-bold text-accent bg-orange-50 px-2 py-1 rounded">
-                      <span>🔥</span> Trending
+                    <div className="text-[10px] font-black text-white bg-accent px-2 py-1 uppercase tracking-widest animate-pulse">
+                      Trending 🔥
                     </div>
                   )}
                 </div>
 
-                <h3 className="font-sans font-semibold text-gray-900 mb-1">{tutorial.tutorName}</h3>
-                <p className="text-sm text-gray-600 font-sans mb-3">{tutorial.topic}</p>
+                <h3 className="text-xl font-serif font-bold text-black mb-1 uppercase">{tutorial.tutorName}</h3>
+                <p className="text-xs text-gray-500 font-sans mb-6 leading-relaxed italic">"{tutorial.topic}"</p>
                 
-                <div className="flex items-center gap-3 mb-4 text-xs font-sans text-gray-500">
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                    {tutorial.views} views
-                  </span>
-                  <span className="flex items-center gap-1 text-green-600 font-medium">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Includes Flashcards
-                  </span>
+                <div className="flex flex-wrap gap-4 mb-8">
+                  <div className="flex items-center gap-2 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    {tutorial.views}
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] font-black text-green-600 uppercase tracking-widest">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Flashcards
+                  </div>
                 </div>
 
-                {isSubscribed ? (
-                  <button className="w-full bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-sans font-medium text-sm transition">
-                    Watch Tutorial
-                  </button>
-                ) : (
-                  <div className="relative rounded-lg overflow-hidden border border-gray-200 group">
-                    <div className="p-4 bg-gray-50 filter blur-[3px] transition group-hover:blur-[2px] opacity-60">
-                      <p className="text-sm text-gray-400 font-sans line-clamp-3 select-none">
-                        "Here is exactly what I said to the student when they got confused... {tutorial.fullTranscript}"
-                      </p>
+                <div className="mt-auto">
+                  {isSubscribed ? (
+                    <button className="w-full bg-black text-white py-4 font-black uppercase tracking-widest text-xs shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+                      Watch Tutorial
+                    </button>
+                  ) : (
+                    <div className="relative border-2 border-black group/reveal overflow-hidden">
+                      <div className="p-6 bg-gray-50 blur-sm opacity-30 select-none">
+                        <p className="text-[10px] leading-relaxed">
+                          {tutorial.fullTranscript.substring(0, 100)}...
+                        </p>
+                      </div>
+                      <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center">
+                        <p className="text-[10px] font-black text-black uppercase tracking-widest mb-4">
+                          {tutorial.cliffhanger}
+                        </p>
+                        <button
+                          onClick={handleSubscribe}
+                          disabled={isLoading}
+                          className="bg-black text-white px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em] shadow-[4px_4px_0px_0px_rgba(255,107,74,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all disabled:opacity-50"
+                        >
+                          {isLoading ? 'Wait...' : 'Unlock Content'}
+                        </button>
+                      </div>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent flex flex-col items-center justify-end pb-4 px-4 text-center">
-                      <button
-                        onClick={handleSubscribe}
-                        disabled={isLoading}
-                        className="flex items-center justify-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-black transition disabled:opacity-70 mx-auto mb-3"
-                      >
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"></path></svg>
-                        {isLoading ? 'Loading...' : 'Unlock to Reveal'}
-                      </button>
-                      <p className="text-sm font-sans font-bold text-gray-800 drop-shadow-md px-2 text-center w-full">
-                        {tutorial.cliffhanger}
-                      </p>
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
+div>
 
         {/* Empty State */}
         {testimonials.length === 0 && (
