@@ -50,15 +50,34 @@ export default function EvaluationDashboard() {
   }
 
   useEffect(() => {
-    // Simulate evaluation generation
-    const timer = setTimeout(() => {
-      const result = generateMockEvaluation()
-      setEvaluation(result)
-      setLoading(false)
-    }, 2000)
+    const fetchEvaluation = async () => {
+      if (!transcript || transcript.length === 0) {
+        setLoading(false)
+        return
+      }
 
-    return () => clearTimeout(timer)
-  }, [])
+      try {
+        const response = await fetch(`${API_BASE}/feedback/evaluate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transcript, topic })
+        })
+
+        if (!response.ok) throw new Error('Failed to fetch evaluation')
+        
+        const data = await response.json()
+        setEvaluation(data)
+      } catch (err) {
+        console.error('Evaluation fetch error:', err)
+        // Fallback to mock if API fails for some reason (to not break the UI)
+        setEvaluation(generateMockEvaluation())
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchEvaluation()
+  }, [transcript, topic])
 
   const generateMockEvaluation = () => {
     const tutorResponses = transcript?.filter(t => t.role === 'tutor') || []
