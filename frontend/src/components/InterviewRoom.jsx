@@ -198,15 +198,16 @@ export default function InterviewRoom() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
-            <div className="h-4 w-[1px] bg-gray-300"></div>
-            <span className="text-[10px] font-black tracking-[0.4em] text-black uppercase">GENESIS</span>
+          <div className="flex items-center">
+            <Link to="/" className="flex flex-col items-start group">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-7 w-auto transition-transform group-hover:scale-105" />
+              <span className="text-[9px] font-black tracking-[0.6em] text-black uppercase -mt-1 ml-0.5">GENESIS</span>
+            </Link>
           </div>
 
           {/* Centered User Badge */}
           <div className="flex justify-center">
-             <div className="hidden md:flex items-center gap-3 bg-gray-50 border border-black px-4 h-9">
+             <div className="hidden md:flex items-center gap-3 bg-white border border-black px-4 h-9 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                 <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Signed In As</span>
                 <span className="text-[9px] font-black text-black uppercase tracking-widest">{tutorName}</span>
              </div>
