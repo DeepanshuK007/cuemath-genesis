@@ -1,9 +1,11 @@
 import { Router } from 'express'
 import { v4 as uuidv4 } from 'uuid'
 import OpenAI from 'openai'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
 const router = Router()
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 
 // In-memory storage
 const sessions = new Map()
@@ -126,22 +128,24 @@ router.post('/chat', async (req, res) => {
   try {
     const { topic, conversationHistory } = req.body
 
-    // Determine which AI service to use (Groq is free/fast)
-    const useGroq = process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.length > 10 && process.env.GROQ_API_KEY !== 'your-groq-key'
-    
-    const aiClient = useGroq 
-      ? new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: 'https://api.groq.com/openai/v1' })
-      : openai
+    // Determine which AI service to use (priority: Gemini > Groq > OpenAI)
+    const useGemini = process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.length > 10
+    const useGroq = !useGemini && process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.length > 10
 
-    const model = useGroq ? 'llama-3.3-70b-versatile' : 'gpt-4o-mini'
+    let reply
 
-    const systemPrompt = `You are Alex, a 10-year-old student taking a math lesson. 
+    if (useGemini) {
+      // Use Gemini
+      console.log('🤖 Using Gemini AI')
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+
+      const systemPrompt = `You are Alex, a 10-year-old student taking a math lesson.
 The user is a tutor candidate. Your goal is to have a natural conversation and eventually learn about: "${topic?.title || 'Math'}".
 
 INTERVIEW STAGES:
 1. GREETING/INTERESTS: If the conversation just started, respond to their greeting. Ask about their hobbies or interests. Mention you like video games.
 2. TOPIC INTRO: If you've already chatted a bit, ask: "Can you explain ${topic?.title} to me? My teacher said it's important."
-3. LEARNING: Let the tutor explain. 
+3. LEARNING: Let the tutor explain.
    - If they use a complex word, ask: "Wait, what does that big word mean?"
    - If they give a real-life example, say: "Oh, that makes sense! Like when I..." (give a small example)
 4. STRESS TEST: After 4-5 messages of explanation, say: "I'm still a bit confused... this feels too hard. Why is it so confusing?"
@@ -154,30 +158,88 @@ PERSONALITY RULES:
 - NEVER break character. You are Alex.
 - Respond naturally to what the tutor says. If they already introduced themselves, don't ask for their name again.`
 
-    const messages = [
-      { role: 'system', content: systemPrompt },
-      ...conversationHistory.map(msg => ({
-        role: msg.role === 'tutor' ? 'user' : 'assistant',
-        content: msg.text
+      const chatHistory = conversationHistory.map(msg => ({
+        role: msg.role === 'tutor' ? 'user' : 'model',
+        parts: [{ text: msg.text }]
       }))
-    ]
 
-    console.log(`🤖 Generating AI response for stage... (Using ${useGroq ? 'Groq' : 'OpenAI'})`)
+      const chat = model.startChat({
+        history: [
+          { role: 'user', parts: [{ text: systemPrompt }] },
+          { role: 'model', parts: [{ text: "Hi! I'm Alex, I'm 10 years old. What's your name?" }] }
+        ],
+        generationConfig: { maxOutputTokens: 150, temperature: 0.8 }
+      })
 
-    const completion = await aiClient.chat.completions.create({
-      model: model,
-      messages,
-      temperature: 0.8,
-      max_tokens: 150
-    })
+      const result = await chat.sendMessage(conversationHistory[conversationHistory.length - 1]?.text || 'Hi')
+      reply = result.response.text()
 
-    const reply = completion.choices[0].message.content
+    } else if (useGroq) {
+      // Use Groq
+      console.log('🤖 Using Groq AI')
+      const aiClient = new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: 'https://api.groq.com/openai/v1' })
+
+      const systemPrompt = `You are Alex, a 10-year-old student taking a math lesson.
+The user is a tutor candidate. Your goal is to have a natural conversation and eventually learn about: "${topic?.title || 'Math'}".
+
+INTERVIEW STAGES:
+1. GREETING/INTERESTS: If the conversation just started, respond to their greeting. Ask about their hobbies or interests. Mention you like video games.
+2. TOPIC INTRO: If you've already chatted a bit, ask: "Can you explain ${topic?.title} to me? My teacher said it's important."
+3. LEARNING: Let the tutor explain.
+   - If they use a complex word, ask: "Wait, what does that big word mean?"
+   - If they give a real-life example, say: "Oh, that makes sense! Like when I..." (give a small example)
+4. STRESS TEST: After 4-5 messages of explanation, say: "I'm still a bit confused... this feels too hard. Why is it so confusing?"
+5. CLOSURE: If they explain well and you've had a good talk, say: "Oh! I think I get it now! You're a great teacher. Thank you!"
+
+PERSONALITY RULES:
+- Speak like a real 10-year-old. Short sentences, simple words.
+- Be curious, slightly hesitant, and easily distracted.
+- Keep responses VERY short (1-2 sentences max).
+- NEVER break character. You are Alex.
+- Respond naturally to what the tutor says. If they already introduced themselves, don't ask for their name again.`
+
+      const messages = [
+        { role: 'system', content: systemPrompt },
+        ...conversationHistory.map(msg => ({
+          role: msg.role === 'tutor' ? 'user' : 'assistant',
+          content: msg.text
+        }))
+      ]
+
+      const completion = await aiClient.chat.completions.create({
+        model: 'llama-3.3-70b-versatile',
+        messages,
+        temperature: 0.8,
+        max_tokens: 150
+      })
+
+      reply = completion.choices[0].message.content
+
+    } else {
+      // Fallback to mock
+      console.log('⚠️ Using Mock Fallback (no AI API key configured)')
+      const tutorMsg = conversationHistory[conversationHistory.length - 1]?.text?.toLowerCase() || ''
+      reply = "That sounds interesting! Can you tell me more?"
+
+      if (tutorMsg.includes('hi') || tutorMsg.includes('hello')) {
+        reply = "Hi! I'm Alex. I'm 10 years old. What's your name?"
+      } else if (tutorMsg.includes('name is') || tutorMsg.includes('i am')) {
+        reply = "Nice to meet you! Do you like video games? I love them! Also, can you help me with my math homework?"
+      } else if (tutorMsg.includes('yes') || tutorMsg.includes('sure') || tutorMsg.includes('topic')) {
+        reply = `Okay! My teacher said I need to learn about ${topic?.title || 'this topic'}. Can you explain it simply?`
+      } else if (tutorMsg.length > 50) {
+        reply = "Wait, that's a lot of big words... I'm a bit confused. Can you say it like I'm a kid?"
+      } else if (tutorMsg.includes('pizza') || tutorMsg.includes('cake')) {
+        reply = "Oh! I love pizza! That makes the math much easier to understand. What happens next?"
+      }
+    }
+
     console.log(`✅ Alex replied: ${reply}`)
     res.json({ reply })
 
   } catch (error) {
     console.error('❌ AI Chat Error:', error.message)
-    
+
     // Fallback logic for Demo Mode (if API fails or quota exceeded)
     console.log('⚠️ Using Mock Fallback because API failed...')
     const tutorMsg = conversationHistory[conversationHistory.length - 1]?.text?.toLowerCase() || ''
