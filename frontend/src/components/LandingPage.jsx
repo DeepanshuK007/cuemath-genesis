@@ -14,7 +14,7 @@ export default function LandingPage() {
             <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
           </div>
           <nav className="flex gap-6 items-center">
-            <Link to="/testimonials" className="text-black hover:text-primary transition font-medium">
+            <Link to="/testimonials" className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-medium">
               Testimonials
             </Link>
             {isSignedIn ? (
@@ -22,13 +22,13 @@ export default function LandingPage() {
                 <span className="text-sm text-black">Hi, {user?.name || user?.email?.split('@')[0]}</span>
                 <button
                   onClick={signOut}
-                  className="text-black hover:text-primary transition font-sans text-sm"
+                  className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-sans text-sm"
                 >
                   Sign Out
                 </button>
               </div>
             ) : (
-              <Link to="/signin" className="text-black hover:text-primary transition font-medium">
+              <Link to="/signin" className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-medium">
                 Sign In
               </Link>
             )}
