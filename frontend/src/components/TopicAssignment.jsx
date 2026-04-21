@@ -47,8 +47,8 @@ export default function TopicAssignment() {
       <header className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center gap-2">
-            <img src="/cuemath-logo.png" alt="Cuemath Logo" className="h-10 w-auto" />
-            <span className="font-sans text-sm text-black font-bold ml-1 tracking-tight">GENESIS</span>
+            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
+            <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
           </div>
         </div>
       </header>

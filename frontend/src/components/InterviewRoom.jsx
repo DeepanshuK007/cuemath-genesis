@@ -189,8 +189,9 @@ export default function InterviewRoom() {
       <header className="bg-white shadow-sm py-4 px-6">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <img src="/cuemath-logo.png" alt="Cuemath Logo" className="h-8 w-auto" />
-            <span className="font-sans font-bold text-gray-800">Live Interview</span>
+            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-8 w-auto" />
+            <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
+            <span className="font-sans font-bold text-gray-800 ml-2">Live Interview</span>
           </div>
           <button
             onClick={handleEndInterview}
