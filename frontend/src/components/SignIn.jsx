@@ -62,11 +62,8 @@ export default function SignIn() {
       <header className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">C</span>
-            </div>
-            <span className="font-sans font-bold text-xl text-gray-800">Cuemath</span>
-            <span className="font-sans text-sm text-primary font-medium ml-1">Genesis</span>
+            <img src="/cuemath-logo.png" alt="Cuemath Logo" className="h-10 w-auto" />
+            <span className="font-sans text-sm text-black font-bold ml-1 tracking-tight">GENESIS</span>
           </Link>
         </div>
       </header>

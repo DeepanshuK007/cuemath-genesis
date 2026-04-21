@@ -182,10 +182,8 @@ export default function LandingPage() {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">C</span>
-            </div>
-            <span className="font-bold">Cuemath Genesis</span>
+            <img src="/cuemath-logo.png" alt="Cuemath Logo" className="h-8 w-auto invert brightness-0" />
+            <span className="font-bold">GENESIS</span>
           </div>
           <p className="text-gray-400 font-sans text-sm">
             Scaling great math education through AI-powered hiring.
