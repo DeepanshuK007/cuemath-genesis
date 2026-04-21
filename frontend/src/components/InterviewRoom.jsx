@@ -195,27 +195,40 @@ export default function InterviewRoom() {
   return (
     <div className="min-h-screen bg-cream flex flex-col font-sans">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100 py-3 px-6">
-        <div className="max-w-5xl mx-auto flex justify-between items-center">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
+          {/* Logo */}
           <div className="flex items-center gap-3">
             <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
             <div className="h-4 w-[1px] bg-gray-300"></div>
             <span className="text-[10px] font-black tracking-widest text-black uppercase">Genesis</span>
           </div>
-          <button
-            onClick={() => {
-              if (canEnd) {
-                handleEndInterview()
-              } else {
-                if (window.confirm("Alex hasn't finished yet. Ending now might affect your evaluation. Are you sure?")) {
+
+          {/* Centered User Badge */}
+          <div className="flex justify-center">
+             <div className="hidden md:flex items-center gap-3 bg-gray-50 border border-black px-4 h-9">
+                <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Signed In As</span>
+                <span className="text-[9px] font-black text-black uppercase tracking-widest">{tutorName}</span>
+             </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex justify-end">
+            <button
+              onClick={() => {
+                if (canEnd) {
                   handleEndInterview()
+                } else {
+                  if (window.confirm("Alex hasn't finished yet. Ending now might affect your evaluation. Are you sure?")) {
+                    handleEndInterview()
+                  }
                 }
-              }
-            }}
-            className={`border border-black px-6 py-2 transition-all text-[10px] font-black uppercase tracking-widest h-10 flex items-center ${canEnd ? 'bg-black text-white' : 'hover:bg-black hover:text-white'}`}
-          >
-            End Session
-          </button>
+              }}
+              className={`border border-black px-6 py-2 transition-all text-[10px] font-black uppercase tracking-widest h-10 flex items-center ${canEnd ? 'bg-black text-white' : 'hover:bg-black hover:text-white'}`}
+            >
+              End Session
+            </button>
+          </div>
         </div>
       </header>
 

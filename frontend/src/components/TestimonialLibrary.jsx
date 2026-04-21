@@ -95,16 +95,36 @@ export default function TestimonialLibrary() {
       )}
 
       {/* Header */}
-      <header className="bg-white border-b border-gray-100 py-3 px-6">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
-            <div className="h-4 w-[1px] bg-gray-300"></div>
-            <span className="text-[10px] font-black tracking-widest text-black uppercase">Genesis</span>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
+          {/* Logo */}
+          <div className="flex items-center gap-6">
+            <Link to="/" className="flex items-center gap-3 group">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto transition-transform group-hover:scale-105" />
+              <div className="h-4 w-[1px] bg-gray-300"></div>
+              <span className="text-[10px] font-black tracking-[0.3em] text-black uppercase">GENESIS</span>
+            </Link>
           </div>
-          <Link to="/" className="border border-black px-6 py-2 hover:bg-black hover:text-white transition-all text-xs font-black uppercase tracking-widest h-10 flex items-center">
-            Exit Library
-          </Link>
+
+          {/* Centered User Badge */}
+          <div className="flex justify-center">
+            {isSubscribed && (
+               <div className="hidden md:flex items-center gap-3 bg-gray-50 border border-black px-4 h-9">
+                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Premium Member</span>
+                  <span className="text-[9px] font-black text-black uppercase tracking-widest italic">Priya</span>
+               </div>
+            )}
+          </div>
+
+          {/* Actions */}
+          <div className="flex justify-end">
+            <Link 
+              to="/" 
+              className="text-black border border-black px-6 py-2 hover:bg-black hover:text-white transition-all text-[10px] font-black uppercase tracking-widest h-10 flex items-center"
+            >
+              Exit Library
+            </Link>
+          </div>
         </div>
       </header>
 

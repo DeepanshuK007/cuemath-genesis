@@ -20,35 +20,40 @@ export default function LandingPage() {
     <div className="min-h-screen bg-cream selection:bg-primary selection:text-white">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-6">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
+          {/* Logo */}
           <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center gap-3 group">
               <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto transition-transform group-hover:scale-105" />
               <div className="h-4 w-[1px] bg-gray-300"></div>
               <span className="text-[10px] font-black tracking-[0.3em] text-black uppercase">GENESIS</span>
             </Link>
+          </div>
 
+          {/* Centered User Badge */}
+          <div className="flex justify-center">
             {isSignedIn && (
-               <div className="hidden md:flex items-center gap-3 bg-gray-50 border border-black px-4 h-10">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Hi,</span>
-                  <span className="text-[10px] font-black text-black uppercase tracking-widest">{user?.name || user?.email?.split('@')[0]}</span>
+               <div className="hidden md:flex items-center gap-3 bg-gray-50 border border-black px-4 h-9">
+                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Signed In As</span>
+                  <span className="text-[9px] font-black text-black uppercase tracking-widest">{user?.name || user?.email?.split('@')[0]}</span>
                </div>
             )}
           </div>
 
-          <nav className="flex items-center gap-4">
-            <Link to="/testimonials" className="border border-black px-6 py-2 hover:bg-black hover:text-white transition-all text-xs font-black uppercase tracking-widest h-10 flex items-center">
+          {/* Navigation */}
+          <nav className="flex items-center justify-end gap-4">
+            <Link to="/testimonials" className="border border-black px-6 py-2 hover:bg-black hover:text-white transition-all text-[10px] font-black uppercase tracking-widest h-10 flex items-center">
               Library
             </Link>
             {isSignedIn ? (
               <button
                 onClick={signOut}
-                className="text-white bg-black hover:bg-gray-800 border border-black px-6 py-2 transition-all duration-300 font-sans font-bold uppercase text-xs tracking-widest h-10 flex items-center"
+                className="text-white bg-black hover:bg-gray-800 border border-black px-6 py-2 transition-all duration-300 font-sans font-bold uppercase text-[10px] tracking-widest h-10 flex items-center"
               >
                 Sign Out
               </button>
             ) : (
-              <Link to="/signin" className="text-white bg-black hover:bg-gray-800 border border-black px-6 py-2 transition-all duration-300 font-sans font-bold uppercase text-xs tracking-widest h-10 flex items-center">
+              <Link to="/signin" className="text-white bg-black hover:bg-gray-800 border border-black px-6 py-2 transition-all duration-300 font-sans font-bold uppercase text-[10px] tracking-widest h-10 flex items-center">
                 Sign In
               </Link>
             )}
