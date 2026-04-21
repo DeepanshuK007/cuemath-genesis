@@ -215,6 +215,9 @@ export default function LandingPage() {
             <p className="text-gray-400 font-sans text-xs uppercase tracking-[0.2em] font-bold">
               © 2026 Cuemath • Scaling Excellence
             </p>
+            <p className="text-[9px] font-black text-primary/30 uppercase tracking-[0.3em] mt-1">
+              Built by Deepanshu
+            </p>
           </div>
 
           <div className="text-center md:text-right max-w-sm">
