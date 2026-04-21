@@ -127,7 +127,7 @@ router.post('/chat', async (req, res) => {
     const { topic, conversationHistory } = req.body
 
     // Determine which AI service to use (Groq is free/fast)
-    const useGroq = process.env.GROQ_API_KEY && process.env.GROQ_API_KEY !== 'your-groq-key'
+    const useGroq = process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.length > 10 && process.env.GROQ_API_KEY !== 'your-groq-key'
     
     const aiClient = useGroq 
       ? new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: 'https://api.groq.com/openai/v1' })

@@ -1,6 +1,12 @@
 import OpenAI from 'openai'
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const useGroq = process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.length > 10 && process.env.GROQ_API_KEY !== 'your-groq-key'
+
+const openai = useGroq
+  ? new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: 'https://api.groq.com/openai/v1' })
+  : new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+
+const model = useGroq ? 'llama-3.3-70b-versatile' : 'gpt-4o-mini'
 
 class EvaluationService {
   async analyzeTranscript(transcript, topic) {
@@ -42,7 +48,7 @@ Important:
 - "bestQuotes" should be the most impressive lines from the tutor.`
 
       const response = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: model,
         messages: [{ role: 'system', content: prompt }],
         response_format: { type: 'json_object' },
         temperature: 0.5,

@@ -130,6 +130,11 @@ export default function InterviewRoom() {
       if (data.reply) {
         setTranscript(prev => [...prev, { role: 'alex', text: data.reply }])
         conversationHistory.current.push({ role: 'alex', text: data.reply })
+
+        // Advance stage if backend provides it
+        if (data.stage) setStage(data.stage)
+        if (data.isEnd) setStage('end')
+
         handleAISpeak(data.reply)
       }
     } catch (err) {
