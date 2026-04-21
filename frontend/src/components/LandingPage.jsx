@@ -60,7 +60,7 @@ export default function LandingPage() {
           </p>
           <Link
             to={isSignedIn ? "/topic" : "/signup"}
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-black px-8 py-4 rounded-full font-sans font-bold text-lg transition shadow-xl hover:shadow-2xl hover:-translate-y-1"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-black px-8 py-4 rounded-none font-sans font-bold text-lg transition shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
             {isSignedIn ? "Continue Your Journey" : "Start Your Journey"}
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
