@@ -11,16 +11,29 @@ const evaluations = new Map()
 
 // Topics bank
 const topics = [
-  { id: 1, title: "Explain fractions to a 9-year-old" },
-  { id: 2, title: "How would you teach a student that 0.5 = 1/2?" },
-  { id: 3, title: "A student says 'I hate math.' What do you do?" },
-  { id: 4, title: "Explain why 2 + 2 = 4 to someone who's never heard of numbers" },
-  { id: 5, title: "How would you help a student who's been staring at a problem for 5 minutes?" },
-  { id: 6, title: "Explain multiplication to someone who only knows addition" },
-  { id: 7, title: "A student got the same question wrong 3 times. How do you help?" },
-  { id: 8, title: "Explain the concept of 'negative numbers' to a 5th grader" },
-  { id: 9, title: "How would you make fractions less scary for a struggling student?" },
-  { id: 10, title: "A student asks 'When will I ever use this in real life?' — your response?" },
+  // Conceptual Topics
+  { id: 1, title: "The 'Pizza' Fractions", description: "Explain why 3/4 of a pizza is more than 2/3, even though 3 is more than 2." },
+  { id: 2, title: "The Mystery of X", description: "Explain what a 'Variable' is (like in 5 + x = 10) without using math jargon." },
+  { id: 3, title: "Decimal Power", description: "Why does 0.5 mean the same thing as 1/2? Explain using money." },
+  { id: 4, title: "The Elevator Math", description: "Explain negative numbers using an elevator going down to a basement." },
+  { id: 5, title: "Area vs. Perimeter", description: "Explain the difference using a garden fence and the grass inside." },
+  { id: 6, title: "The 'Why' of Division", description: "Why can't we divide a number by zero? Use a bag of candies as an analogy." },
+  { id: 7, title: "Ratio & Proportions", description: "Explain ratios using a recipe for making the perfect chocolate milk." },
+  { id: 8, title: "The Zero Property", description: "Why is any number multiplied by zero always zero? Explain to a curious child." },
+  { id: 9, title: "Probability Basics", description: "Explain the chance of winning a game using a bag of colored marbles." },
+  { id: 10, title: "Order of Operations", description: "Why do we have to do multiplication before addition? Use a 'Secret Code' analogy." },
+
+  // Behavioral/Tutoring Scenarios
+  { id: 11, title: "The 'I Hate Math' Wall", description: "A student says 'I'm just not a math person.' How do you change their mind?" },
+  { id: 12, title: "The Frozen Student", description: "A student has been staring at a problem for 5 minutes and is about to cry. What do you say?" },
+  { id: 13, title: "The 'When Will I Use This?'", description: "The student asks why they need to learn long division in the age of calculators." },
+  { id: 14, title: "The Persistent Error", description: "A student keeps saying 7 x 8 is 54. How do you help them find the right answer without just telling them?" },
+  { id: 15, title: "The Jargon Trap", description: "You accidentally used the word 'Denominator'. Now explain it like it's a superhero name." },
+  { id: 16, title: "The Speedster", description: "A student is rushing through work and making 'silly' mistakes. How do you slow them down?" },
+  { id: 17, title: "The Silent Learner", description: "The student is very shy and only gives one-word answers. How do you get them to explain their thinking?" },
+  { id: 18, title: "The Overwhelmed Mind", description: "A student says 'This is too much, I'll never get it.' Break down a 3-step problem for them." },
+  { id: 19, title: "The Competitive Spirit", description: "A student is upset because they are slower than their friends. How do you encourage them?" },
+  { id: 20, title: "The 'Aha!' Moment", description: "Help a student finally 'see' why a square is also a rectangle." }
 ]
 
 // Mock AI responses for the "Curious Child"
@@ -164,7 +177,25 @@ PERSONALITY RULES:
 
   } catch (error) {
     console.error('❌ AI Chat Error:', error.message)
-    res.status(500).json({ error: 'Failed to generate response', details: error.message })
+    
+    // Fallback logic for Demo Mode (if API fails or quota exceeded)
+    console.log('⚠️ Using Mock Fallback because API failed...')
+    const tutorMsg = conversationHistory[conversationHistory.length - 1]?.text?.toLowerCase() || ''
+    let reply = "That sounds interesting! Can you tell me more?"
+
+    if (tutorMsg.includes('hi') || tutorMsg.includes('hello')) {
+      reply = "Hi! I'm Alex. I'm 10 years old. What's your name?"
+    } else if (tutorMsg.includes('name is') || tutorMsg.includes('i am')) {
+      reply = "Nice to meet you! Do you like video games? I love them! Also, can you help me with my math homework?"
+    } else if (tutorMsg.includes('yes') || tutorMsg.includes('sure') || tutorMsg.includes('topic')) {
+      reply = `Okay! My teacher said I need to learn about ${topic?.title || 'this topic'}. Can you explain it simply?`
+    } else if (tutorMsg.length > 50) {
+      reply = "Wait, that's a lot of big words... I'm a bit confused. Can you say it like I'm a kid?"
+    } else if (tutorMsg.includes('pizza') || tutorMsg.includes('cake')) {
+      reply = "Oh! I love pizza! That makes the math much easier to understand. What happens next?"
+    }
+
+    res.json({ reply, note: 'Demo mode fallback (API error)' })
   }
 })
 
