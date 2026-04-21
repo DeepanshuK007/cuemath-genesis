@@ -56,10 +56,11 @@ export default function LandingPage() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
           {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="flex flex-col items-start group">
-              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-7 w-auto transition-transform group-hover:scale-105" />
-              <span className="text-[9px] font-black tracking-[0.6em] text-black uppercase -mt-1 ml-0.5">GENESIS</span>
+          <div className="flex items-center gap-6">
+            <Link to="/" className="flex items-center gap-3 group">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto transition-transform group-hover:scale-105" />
+              <div className="h-4 w-[1px] bg-gray-300"></div>
+              <span className="text-[10px] font-black tracking-[0.4em] text-black uppercase">GENESIS</span>
             </Link>
           </div>
 
@@ -319,10 +320,9 @@ export default function LandingPage() {
       <footer className="bg-black text-white py-20 px-8 border-t border-gray-900">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-end">
           <div>
-            <div className="flex items-center gap-3 mb-8">
-               <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-8 w-auto brightness-0 invert" />
-               <div className="h-5 w-[1px] bg-gray-700"></div>
-               <span className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-400">GENESIS</span>
+            <div className="flex flex-col items-start mb-6">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-10 w-auto invert brightness-0 mb-1" />
+              <span className="text-[11px] font-black tracking-[0.6em] text-white uppercase ml-1">GENESIS</span>
             </div>
             <p className="text-gray-500 font-sans max-w-md leading-relaxed mb-8">
               Empowering the world's best educators through high-fidelity AI simulations. We believe teaching is an art form.

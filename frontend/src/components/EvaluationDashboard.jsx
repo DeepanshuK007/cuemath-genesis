@@ -81,10 +81,11 @@ export default function EvaluationDashboard() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
           {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="flex flex-col items-start group">
-              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-7 w-auto transition-transform group-hover:scale-105" />
-              <span className="text-[9px] font-black tracking-[0.6em] text-black uppercase -mt-1 ml-0.5">GENESIS</span>
+          <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3 group">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto transition-transform group-hover:scale-105" />
+              <div className="h-4 w-[1px] bg-gray-300"></div>
+              <span className="text-[10px] font-black tracking-[0.4em] text-black uppercase">GENESIS</span>
             </Link>
           </div>
 
