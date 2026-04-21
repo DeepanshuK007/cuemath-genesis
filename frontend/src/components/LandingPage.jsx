@@ -308,7 +308,7 @@ export default function LandingPage() {
 
           <div className="text-center md:text-right">
             <p className="text-gray-500 font-sans text-sm font-medium leading-relaxed">
-              Empowering the world's best educators through high-fidelity AI simulations.
+              Built with Passion by <span className="text-white font-black italic">Deepanshu</span>
             </p>
           </div>
         </div>
