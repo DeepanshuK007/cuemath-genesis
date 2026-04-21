@@ -50,7 +50,7 @@ export default function SignupForm() {
             <Link to="/" className="flex items-center gap-3 group">
               <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto transition-transform group-hover:scale-105" />
               <div className="h-4 w-[1px] bg-gray-300"></div>
-              <span className="text-[10px] font-black tracking-[0.3em] text-black uppercase">Genesis</span>
+              <span className="text-[10px] font-black tracking-[0.3em] text-black uppercase">GENESIS</span>
             </Link>
           </div>
           <Link to="/signin" className="text-black border border-black px-6 py-2 hover:bg-black hover:text-white transition-all text-[10px] font-black uppercase tracking-widest h-10 flex items-center">

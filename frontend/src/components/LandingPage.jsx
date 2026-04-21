@@ -255,21 +255,21 @@ export default function LandingPage() {
           </div>
 
           <div className="max-w-4xl mx-auto px-8 relative z-10">
-            <div className="bg-black text-white p-16 md:p-24 text-center shadow-[16px_16px_0px_0px_rgba(56,31,240,1)] relative overflow-hidden group">
+            <div className="bg-black text-white p-12 md:p-16 text-center shadow-[12px_12px_0px_0px_rgba(56,31,240,1)] relative overflow-hidden group">
               {/* Internal Accent */}
               <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
               
-              <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em] block mb-8">Join the Elite</span>
-              <h2 className="text-5xl md:text-7xl font-serif font-bold mb-10 leading-tight">
+              <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em] block mb-6">Join the Elite</span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8 leading-tight">
                 Ready to Make <br />
                 <span className="text-primary italic underline decoration-white decoration-4 underline-offset-8">Math Fun?</span>
               </h2>
-              <p className="text-gray-400 font-sans text-xl mb-14 max-w-xl mx-auto leading-relaxed">
+              <p className="text-gray-400 font-sans text-lg mb-12 max-w-xl mx-auto leading-relaxed">
                 Join hundreds of tutors who are already inspiring young minds and earning through their passion.
               </p>
               <Link
                 to="/signup"
-                className="inline-flex items-center gap-4 bg-white text-black px-12 py-6 font-black uppercase tracking-widest text-xl shadow-[8px_8px_0px_0px_rgba(255,107,74,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95"
+                className="inline-flex items-center gap-4 bg-white text-black px-10 py-5 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(255,107,74,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95"
               >
                 Apply Now
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -288,7 +288,7 @@ export default function LandingPage() {
             <div className="flex items-center gap-3 mb-8">
                <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-8 w-auto brightness-0 invert" />
                <div className="h-5 w-[1px] bg-gray-700"></div>
-               <span className="text-xs font-black tracking-[0.4em] uppercase text-gray-400">GENESIS</span>
+               <span className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-400">GENESIS</span>
             </div>
             <p className="text-gray-500 font-sans max-w-md leading-relaxed mb-8">
               Empowering the world's best educators through high-fidelity AI simulations. We believe teaching is an art form.

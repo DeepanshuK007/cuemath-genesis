@@ -201,7 +201,7 @@ export default function InterviewRoom() {
           <div className="flex items-center gap-3">
             <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
             <div className="h-4 w-[1px] bg-gray-300"></div>
-            <span className="text-[10px] font-black tracking-widest text-black uppercase">Genesis</span>
+            <span className="text-[10px] font-black tracking-[0.3em] text-black uppercase">GENESIS</span>
           </div>
 
           {/* Centered User Badge */}
