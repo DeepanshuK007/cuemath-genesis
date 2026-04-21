@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { api } from '../services/api'
+import { motion } from 'framer-motion'
 
 export default function SignupForm() {
   const navigate = useNavigate()
@@ -9,159 +9,149 @@ export default function SignupForm() {
     email: '',
     phone: '',
     experience: 'beginner',
-    subjects: [],
-    motivation: '',
+    subjects: ['Math'],
+    reason: ''
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const subjects = ['Math', 'Science', 'English', 'Hindi', 'Other']
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubjectToggle = (subject) => {
-    setFormData(prev => ({
-      ...prev,
-      subjects: prev.subjects.includes(subject)
-        ? prev.subjects.filter(s => s !== subject)
-        : [...prev.subjects, subject]
-    }))
+  const toggleSubject = (sub) => {
+    if (formData.subjects.includes(sub)) {
+      setFormData({ ...formData, subjects: formData.subjects.filter(s => s !== sub) })
+    } else {
+      setFormData({ ...formData, subjects: [...formData.subjects, sub] })
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setError('')
-
-    try {
-      const result = await api.signup(formData)
-      if (result.id) {
-        // Store tutor ID for later use
-        localStorage.setItem('tutorId', result.id)
-        localStorage.setItem('tutorName', formData.name)
-        navigate('/topic')
-      } else {
-        setError('Something went wrong. Please try again.')
-      }
-    } catch (err) {
-      setError('Failed to submit. Please check your connection.')
-    } finally {
-      setIsSubmitting(false)
-    }
+    setIsLoading(true)
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    localStorage.setItem('tutorName', formData.name)
+    localStorage.setItem('tutorId', 'mock-id-' + Math.random())
+    navigate('/topic')
+    setIsLoading(false)
   }
 
   return (
-    <div className="min-h-screen bg-cream">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-6 py-2">
-          <div className="flex items-center gap-2">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
-            <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
+    <div className="min-h-screen bg-cream selection:bg-primary selection:text-white">
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-6">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-6">
+            <Link to="/" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-black transition-colors group">
+              <svg className="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M10 19l-7-7m0 0l-7-7m7 7h18" />
+              </svg>
+              Back
+            </Link>
+            <div className="h-4 w-[1px] bg-gray-200"></div>
+            <Link to="/" className="flex items-center gap-3 group">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto transition-transform group-hover:scale-105" />
+              <div className="h-4 w-[1px] bg-gray-300"></div>
+              <span className="text-[10px] font-black tracking-[0.3em] text-black uppercase">Genesis</span>
+            </Link>
           </div>
+          <Link to="/signin" className="text-black border border-black px-6 py-2 hover:bg-black hover:text-white transition-all text-[10px] font-black uppercase tracking-widest h-10 flex items-center">
+            Sign In
+          </Link>
         </div>
       </header>
 
-      {/* Form */}
-      <main className="max-w-xl mx-auto px-6 py-12">
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">
-            Join Our Tutor Community
-          </h1>
-          <p className="text-gray-600 mb-8 font-sans">
-            Tell us about yourself so we can get to know you better.
-          </p>
+      {/* Main Content */}
+      <main className="pt-32 pb-20 px-6 flex items-center justify-center min-h-screen">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-2xl w-full bg-white border-2 border-black p-10 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative"
+        >
+          <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary border-l-2 border-b-2 border-black"></div>
 
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-              {error}
-            </div>
-          )}
+          <div className="text-center mb-10">
+            <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-3">Tutor Community</span>
+            <h1 className="text-4xl font-serif font-bold text-black mb-2 uppercase tracking-tight">
+              Join Our <span className="text-primary italic">Community</span>
+            </h1>
+            <p className="text-gray-400 text-xs font-sans uppercase tracking-widest">
+              Tell us about yourself so we can get to know you better.
+            </p>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name */}
-            <div>
-              <label className="block text-sm font-sans font-medium text-gray-700 mb-2">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-sans"
-                placeholder="Tamanna Kothari"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-sans font-medium text-gray-700 mb-2">
-                Email Address *
-              </label>
-              <input
-                type="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-sans"
-                placeholder="priya@example.com"
-              />
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label className="block text-sm font-sans font-medium text-gray-700 mb-2">
-                Phone Number *
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                required
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-sans"
-                placeholder="+91 98765 43210"
-              />
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-4 bg-gray-50 border-2 border-black rounded-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] transition-all outline-none font-sans text-sm"
+                  placeholder="Tamanna Kothari"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-4 bg-gray-50 border-2 border-black rounded-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] transition-all outline-none font-sans text-sm"
+                  placeholder="priya@example.com"
+                />
+              </div>
             </div>
 
-            {/* Experience */}
-            <div>
-              <label className="block text-sm font-sans font-medium text-gray-700 mb-2">
-                Teaching Experience
-              </label>
-              <select
-                name="experience"
-                value={formData.experience}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-sans"
-              >
-                <option value="beginner">New to teaching</option>
-                <option value="intermediate">1-3 years experience</option>
-                <option value="expert">3+ years experience</option>
-              </select>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-4 py-4 bg-gray-50 border-2 border-black rounded-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] transition-all outline-none font-sans text-sm"
+                  placeholder="+91 98765 43210"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
+                  Teaching Experience
+                </label>
+                <select
+                  value={formData.experience}
+                  onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
+                  className="w-full px-4 py-4 bg-gray-50 border-2 border-black rounded-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] transition-all outline-none font-sans text-sm appearance-none cursor-pointer"
+                >
+                  <option value="beginner">New to teaching</option>
+                  <option value="intermediate">1-3 years experience</option>
+                  <option value="expert">3+ years experience</option>
+                </select>
+              </div>
             </div>
 
-            {/* Subjects */}
             <div>
-              <label className="block text-sm font-sans font-medium text-gray-700 mb-2">
+              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">
                 Subjects You Can Teach
               </label>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {subjects.map(subject => (
                   <button
                     key={subject}
                     type="button"
-                    onClick={() => handleSubjectToggle(subject)}
-                    className={`px-4 py-2 rounded-full font-sans text-sm transition ${
-                      formData.subjects.includes(subject)
-                        ? 'bg-primary text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    onClick={() => toggleSubject(subject)}
+                    className={`px-6 py-2 text-[10px] font-black uppercase tracking-widest border-2 border-black transition-all ${
+                      formData.subjects.includes(subject) 
+                      ? 'bg-primary text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' 
+                      : 'bg-white text-black hover:bg-gray-50'
                     }`}
                   >
                     {subject}
@@ -170,39 +160,36 @@ export default function SignupForm() {
               </div>
             </div>
 
-            {/* Motivation */}
             <div>
-              <label className="block text-sm font-sans font-medium text-gray-700 mb-2">
+              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
                 Why do you want to tutor? (Optional)
               </label>
               <textarea
-                name="motivation"
-                value={formData.motivation}
-                onChange={handleChange}
-                rows={3}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-sans resize-none"
+                value={formData.reason}
+                onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                className="w-full px-4 py-4 bg-gray-50 border-2 border-black rounded-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] transition-all outline-none font-sans text-sm h-32 resize-none"
                 placeholder="Share what inspires you to teach..."
               />
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-400 text-white py-4 rounded-lg font-sans font-semibold text-lg transition"
+              disabled={isLoading}
+              className="w-full bg-black text-white py-5 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 disabled:bg-gray-400"
             >
-              {isSubmitting ? 'Submitting...' : 'Continue to Interview'}
+              {isLoading ? 'Wait...' : 'Continue to Interview'}
             </button>
           </form>
 
-          {/* Sign In Link */}
-          <p className="text-center text-gray-600 mt-6 font-sans text-sm">
-            Already have an account?{' '}
-            <Link to="/signin" className="text-primary hover:underline font-medium">
-              Sign In
-            </Link>
-          </p>
-        </div>
+          <div className="mt-10 pt-10 border-t border-gray-100 text-center">
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+              Already have an account?{' '}
+              <Link to="/signin" className="text-primary hover:underline underline-offset-4 ml-1">
+                Sign In
+              </Link>
+            </p>
+          </div>
+        </motion.div>
       </main>
     </div>
   )

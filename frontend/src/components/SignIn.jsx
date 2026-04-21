@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { GoogleLogin } from '@react-oauth/google'
 import { API_BASE } from '../services/api'
+import { motion } from 'framer-motion'
 
 export default function SignIn() {
   const navigate = useNavigate()
@@ -57,88 +58,114 @@ export default function SignIn() {
   }
 
   return (
-    <div className="min-h-screen bg-cream">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-6 py-2">
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
-            <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
+    <div className="min-h-screen bg-cream selection:bg-primary selection:text-white">
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-6">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-6">
+            <Link to="/" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-black transition-colors group">
+              <svg className="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M10 19l-7-7m0 0l-7-7m7 7h18" />
+              </svg>
+              Back
+            </Link>
+            <div className="h-4 w-[1px] bg-gray-200"></div>
+            <Link to="/" className="flex items-center gap-3 group">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto transition-transform group-hover:scale-105" />
+              <div className="h-4 w-[1px] bg-gray-300"></div>
+              <span className="text-[10px] font-black tracking-[0.3em] text-black uppercase">Genesis</span>
+            </Link>
+          </div>
+          <Link to="/signup" className="text-black border border-black px-6 py-2 hover:bg-black hover:text-white transition-all text-[10px] font-black uppercase tracking-widest h-10 flex items-center">
+            Apply Now
           </Link>
         </div>
       </header>
 
-      {/* Sign In Form */}
-      <main className="max-w-md mx-auto px-6 py-16">
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2 text-center">
-            Welcome Back
-          </h1>
-          <p className="text-gray-600 text-center mb-8 font-sans">
-            Sign in to continue your tutor journey
-          </p>
+      {/* Main Content */}
+      <main className="pt-32 pb-20 px-6 flex items-center justify-center min-h-screen">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-md w-full bg-white border-2 border-black p-10 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative"
+        >
+          {/* Decorative Corner */}
+          <div className="absolute -top-1 -left-1 w-4 h-4 bg-primary border-r-2 border-b-2 border-black"></div>
+
+          <div className="text-center mb-10">
+            <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-3">Tutor Access</span>
+            <h1 className="text-4xl font-serif font-bold text-black mb-2 uppercase tracking-tight">
+              Welcome Back
+            </h1>
+            <p className="text-gray-400 text-xs font-sans uppercase tracking-widest">
+              Continue your journey
+            </p>
+          </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 font-sans text-sm">
+            <div className="bg-red-50 border-2 border-black text-red-600 px-4 py-3 mb-8 font-black text-[10px] uppercase tracking-widest text-center animate-shake">
               {error}
             </div>
           )}
 
-          {/* Google Sign In Button */}
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleError}
-            useOneTap={false}
-            theme="outline"
-            size="large"
-            text="signin_with"
-            shape="rectangular"
-            width="100%"
-          />
+          {/* Google Sign In Section */}
+          <div className="mb-8 border-2 border-black p-1 hover:bg-gray-50 transition-colors">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              useOneTap={false}
+              theme="outline"
+              size="large"
+              shape="rectangular"
+              width="100%"
+            />
+          </div>
 
-          <div className="relative my-6">
+          <div className="relative mb-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+              <div className="w-full border-t border-gray-100"></div>
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">or</span>
+            <div className="relative flex justify-center text-[10px]">
+              <span className="px-4 bg-white text-gray-400 font-black uppercase tracking-widest italic">or</span>
             </div>
           </div>
 
           {/* Email/Password Form */}
-          <form onSubmit={handleEmailSignIn} className="space-y-4">
+          <form onSubmit={handleEmailSignIn} className="space-y-6">
             <div>
-              <label className="block text-sm font-sans font-medium text-gray-700 mb-2">
+              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
                 Email Address
               </label>
               <input
                 type="email"
+                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-sans"
+                className="w-full px-4 py-4 bg-gray-50 border-2 border-black rounded-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] transition-all outline-none font-sans"
                 placeholder="priya@example.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-sans font-medium text-gray-700 mb-2">
+              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
                 Password
               </label>
               <input
                 type="password"
+                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-sans"
+                className="w-full px-4 py-4 bg-gray-50 border-2 border-black rounded-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] transition-all outline-none font-sans"
                 placeholder="Enter your password"
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input type="checkbox" className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary" />
-                <span className="ml-2 text-sm text-gray-600 font-sans">Remember me</span>
+            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest">
+              <label className="flex items-center cursor-pointer group">
+                <input type="checkbox" className="w-4 h-4 border-2 border-black rounded-none text-primary focus:ring-0" />
+                <span className="ml-2 text-gray-500 group-hover:text-black transition-colors">Remember me</span>
               </label>
-              <a href="#" className="text-sm text-primary hover:underline font-sans">
+              <a href="#" className="text-primary hover:underline">
                 Forgot password?
               </a>
             </div>
@@ -146,20 +173,22 @@ export default function SignIn() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-400 text-white py-3 rounded-lg font-sans font-semibold transition"
+              className="w-full bg-black text-white py-5 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 disabled:bg-gray-400 disabled:shadow-none"
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? 'Wait...' : 'Sign In'}
             </button>
           </form>
 
-          {/* Sign Up Link */}
-          <p className="text-center text-gray-600 mt-6 font-sans text-sm">
-            Don't have an account?{' '}
-            <Link to="/signup" className="text-primary hover:underline font-medium">
-              Apply Now
-            </Link>
-          </p>
-        </div>
+          {/* Bottom Link */}
+          <div className="mt-10 pt-10 border-t border-gray-100 text-center">
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+              Don't have an account?{' '}
+              <Link to="/signup" className="text-primary hover:underline underline-offset-4 ml-1">
+                Apply Now
+              </Link>
+            </p>
+          </div>
+        </motion.div>
       </main>
     </div>
   )
