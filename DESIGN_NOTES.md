@@ -1,5 +1,12 @@
 # Cuemath Genesis: Design & Implementation Notes
 
+## The Idea Behind the Project
+Scaling high-quality math education is a massive challenge, primarily because the bottleneck is **tutor hiring**. Evaluating thousands of applicants for empathy, patience, and clarity is slow and subjective when done by humans.
+
+**Cuemath Genesis** solves this by using AI to simulate the "Student Experience." Instead of a traditional interview, applicants teach **Alex**, an AI persona of a 10-year-old student who gets confused and needs guidance. This provides a standardized, objective way to measure a tutor's "Teaching DNA" before they ever speak to a human interviewer.
+
+---
+
 This document outlines the architectural decisions, trade-offs, and improvements made during the development and standardization of the Cuemath Genesis platform.
 
 ## 1. AI Strategy & Integration

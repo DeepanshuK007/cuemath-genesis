@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 40px auto; padding: 20px; }
+  h1 { color: #381FF0; border-bottom: 2px solid #381FF0; padding-bottom: 10px; }
+  h2 { color: #FF6B4A; margin-top: 30px; }
+  h3 { color: #444; }
+  ul { margin-bottom: 20px; }
+  li { margin-bottom: 8px; }
+  hr { border: 0; border-top: 1px solid #eee; margin: 40px 0; }
+  .status { background: #f0f4ff; padding: 15px; border-radius: 8px; border-left: 4px solid #381FF0; }
+</style>
+</head>
+<body>
+  <h1>Cuemath Genesis: Design & Implementation Notes</h1>
+  
+  <div class="status" style="margin-bottom: 30px;">
+    <strong>The Idea Behind the Project</strong><br>
+    Scaling high-quality math education is a massive challenge, primarily because the bottleneck is <strong>tutor hiring</strong>. Evaluating thousands of applicants for empathy, patience, and clarity is slow and subjective when done by humans.<br><br>
+    <strong>Cuemath Genesis</strong> solves this by using AI to simulate the "Student Experience." Instead of a traditional interview, applicants teach <strong>Alex</strong>, an AI persona of a 10-year-old student who gets confused and needs guidance. This provides a standardized, objective way to measure a tutor's "Teaching DNA" before they ever speak to a human interviewer.
+  </div>
+
+  <p>This document outlines the architectural decisions, trade-offs, and improvements made during the development and standardization of the Cuemath Genesis platform.</p>
+
+  <h2>1. AI Strategy & Integration</h2>
+  <h3>Decisions</h3>
+  <ul>
+    <li><strong>Gemini-Only Core</strong>: Standardized the entire platform on <strong>Google Gemini 1.5 Flash</strong>. This includes Chat, Evaluation, and Transcription.</li>
+    <li><strong>Native Audio Processing</strong>: Replaced OpenAI Whisper with Gemini's native audio capabilities in <code>transcription.js</code>.</li>
+    <li><strong>System Prompting</strong>: Implemented a "Persona-First" prompting strategy for <strong>Alex</strong>, the 10-year-old student, to ensure consistent character behavior during interviews.</li>
+  </ul>
+  <h3>Trade-offs</h3>
+  <ul>
+    <li><strong>Provider Lock-in</strong>: Moving exclusively to Gemini simplifies the codebase but creates a dependency on a single provider.</li>
+    <li><strong>Latency vs. Intelligence</strong>: Using Gemini 1.5 Flash provides a balance of speed and reasoning.</li>
+  </ul>
+
+  <h2>2. User Experience (UX) & Design</h2>
+  <h3>Decisions</h3>
+  <ul>
+    <li><strong>Two-Column Interview Layout</strong>: Moved from a single-column scroll to a split-panel "Mission Control" layout.</li>
+    <li><strong>Glassmorphism Design System</strong>: Adopted a modern, translucent aesthetic with subtle borders.</li>
+    <li><strong>Math Notebook Backdrop</strong>: Added a subtle 30px grid background to the <code>body</code> to reinforce the educational context.</li>
+  </ul>
+  <h3>Improvements</h3>
+  <ul>
+    <li><strong>Cognitive Load Reduction</strong>: Pins the Topic Card and Session Progress for easy reference.</li>
+    <li><strong>Visual Feedback</strong>: Integrated state-aware indicators (Listening, Thinking, Speaking).</li>
+  </ul>
+
+  <h2>3. Technical Architecture</h2>
+  <h3>Decisions</h3>
+  <ul>
+    <li><strong>Vite/React Frontend</strong>: Leveraged Vite for ultra-fast development.</li>
+    <li><strong>Node.js/Express Backend</strong>: Kept the backend lightweight for secure API orchestration.</li>
+    <li><strong>Removal of Database Logic</strong>: Simplified the prototype by removing local database dependencies.</li>
+  </ul>
+  <h3>Improvements</h3>
+  <ul>
+    <li><strong>Clean Dependency Tree</strong>: Purged <code>openai</code> and <code>groq</code> packages.</li>
+    <li><strong>Environment Standardization</strong>: Centralized AI configuration under a single <code>GEMINI_API_KEY</code>.</li>
+  </ul>
+
+  <h2>4. Evaluation & Feedback Loop</h2>
+  <h3>Decisions</h3>
+  <ul>
+    <li><strong>Multi-Dimensional Scoring</strong>: Evaluation based on Warmth, Clarity, Patience, Simplicity, and Fluency.</li>
+    <li><strong>Automated Flashcards</strong>: System generates educational flashcards during the interview.</li>
+  </ul>
+  <h3>Improvements</h3>
+  <ul>
+    <li><strong>Report Transparency</strong>: The dashboard visualizes scores with high-impact charts and transcript highlights.</li>
+  </ul>
+
+  <hr>
+  <div class="status">
+    <strong>Status</strong>: Production Ready<br>
+    <strong>AI Engine</strong>: Google Gemini 1.5 Flash<br>
+    <strong>Design Tokens</strong>: Outfit, Albert Sans, Cuemath Purple (#381FF0)
+  </div>
+</body>
+</html>
