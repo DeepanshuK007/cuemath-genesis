@@ -35,7 +35,7 @@ export default function InterviewRoom() {
 
     // Start intro after a short delay
     const timer = setTimeout(() => {
-      const initialMessage = `Hi ${tutorName}! I'm Alex, and I'm 10 years old. Okay, so my teacher gave me this card but I don't get it... ${topic.description} Can you help me understand?`
+      const initialMessage = `Hi ${tutorName}! I'm Alex. My teacher gave me this card: "${topic.title}". ${topic.description} Can you help me?`
       conversationHistory.current.push({ role: 'alex', text: initialMessage })
       setTranscript(prev => [...prev, { role: 'alex', text: initialMessage }])
       handleAISpeak(initialMessage, 'interviewing')
@@ -217,97 +217,90 @@ export default function InterviewRoom() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-5xl mx-auto w-full grid md:grid-cols-[300px_1fr] gap-8 p-8">
+      <main className="flex-1 max-w-6xl mx-auto w-full grid md:grid-cols-[280px_1fr] gap-12 p-8">
         {/* Left Sidebar: Context */}
         <aside className="space-y-6">
-          <div className="border border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <span className="text-[9px] font-black text-primary uppercase tracking-widest block mb-2">Active Topic</span>
-            <h2 className="text-xl font-serif font-bold text-black mb-3">{topic?.title}</h2>
-            <p className="text-xs text-gray-500 leading-relaxed">{topic?.description}</p>
+          <div className="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-2">Topic</span>
+            <h2 className="text-xl font-serif font-bold text-black mb-3 leading-tight">{topic?.title}</h2>
+            <div className="h-[1px] bg-gray-100 w-full mb-3"></div>
+            <p className="text-[11px] text-gray-500 leading-relaxed italic">"{topic?.description}"</p>
           </div>
 
-          <div className="border border-black bg-gray-50 p-6">
-             <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-2">Stage</span>
-             <p className="text-xs font-bold text-black uppercase tracking-tight">
-                {stage === 'intro' ? 'Introduction' : stage.replace('_', ' ')}
+          <div className="border-2 border-black bg-gray-50 p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)]">
+             <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.4em] block mb-2">Current Stage</span>
+             <p className="text-xs font-black text-black uppercase tracking-widest">
+                {stage === 'intro' ? 'Intro' : stage.replace('_', ' ')}
              </p>
           </div>
-
-          {flashcards.length > 0 && (
-            <div className="border border-primary/20 bg-primary/5 p-6 animate-fade-in">
-              <span className="text-[9px] font-black text-primary uppercase tracking-widest block mb-2">Visual Aids Built</span>
-              <div className="space-y-2">
-                {flashcards.slice(-2).map((card, i) => (
-                  <div key={i} className="text-[10px] font-medium text-primary-dark truncate bg-white/50 px-2 py-1">
-                    {card.type}: {card.front}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </aside>
 
-        {/* Right Content: Interaction */}
-        <div className="flex flex-col">
+        {/* Right Content: Interaction Area */}
+        <div className="flex flex-col h-full border-2 border-black bg-white shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
+          {/* Background Decorative Art */}
+          <div className="absolute top-0 right-0 w-32 h-32 opacity-[0.03] pointer-events-none">
+             <img src="/math-art.png" alt="" className="w-full h-auto" />
+          </div>
+
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 text-xs font-bold text-red-700 uppercase tracking-tight">
+            <div className="bg-red-50 border-b-2 border-red-500 p-4 text-[10px] font-black text-red-700 uppercase tracking-widest text-center animate-pulse">
               {error}
             </div>
           )}
 
           {/* Alex's Message Area */}
-          <div className="flex-1 flex flex-col items-center justify-center py-12">
-            <div className="relative mb-12">
-               <div className={`w-32 h-32 rounded-none border-2 border-black flex items-center justify-center transition-all duration-500 bg-white ${isAITalking ? 'shadow-[8px_8px_0px_0px_rgba(255,107,74,1)] scale-105' : 'shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
-                  <span className="text-4xl">👦</span>
+          <div className="flex-1 flex flex-col items-center justify-center p-12 text-center">
+            <div className="relative mb-10">
+               <div className={`w-32 h-32 rounded-none border-2 border-black flex items-center justify-center transition-all duration-500 bg-white ${isAITalking ? 'shadow-[8px_8px_0px_0px_rgba(255,107,74,1)] scale-105' : 'shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]'}`}>
+                  <span className="text-5xl">👦</span>
                </div>
                {isAITalking && (
-                 <div className="absolute -top-4 -right-4 bg-accent text-white text-[10px] font-black px-2 py-1 uppercase tracking-widest animate-bounce">
-                    Talking...
+                 <div className="absolute -top-4 -right-4 bg-accent text-white text-[9px] font-black px-2 py-1 uppercase tracking-widest animate-bounce">
+                    Speaking
                  </div>
                )}
             </div>
 
-            <div className="max-w-lg text-center">
-              <p className="text-xl md:text-2xl font-serif font-medium text-black leading-snug mb-8">
-                {currentAIMessage || lastAIMessage || "Waiting for Alex..."}
+            <div className="max-w-md mx-auto">
+              <p className="text-2xl md:text-3xl font-serif font-medium text-black leading-tight italic">
+                "{currentAIMessage || lastAIMessage || "Ready when you are..."}"
               </p>
             </div>
           </div>
 
           {/* Interaction Bar */}
-          <div className="border-t border-gray-100 pt-12 pb-6 flex flex-col items-center gap-6">
+          <div className="border-t-2 border-black p-8 flex flex-col items-center gap-6 bg-gray-50/50">
             <div className="flex items-center gap-4">
                {stage !== 'end' ? (
                  <button
                    onClick={handleStartRecording}
                    disabled={isAITalking || isTranscribing}
-                   className={`w-24 h-24 rounded-none border-2 border-black flex items-center justify-center transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1 ${
+                   className={`w-28 h-28 rounded-none border-4 border-black flex items-center justify-center transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-2 active:translate-y-2 ${
                      isRecording ? 'bg-red-500' : isTranscribing ? 'bg-blue-500 cursor-wait' : 'bg-primary hover:bg-primary-dark'
-                   } disabled:bg-gray-100 disabled:shadow-none disabled:border-gray-200`}
+                   } disabled:bg-gray-100 disabled:shadow-none disabled:border-gray-300`}
                  >
                    {isRecording ? (
-                     <div className="w-8 h-8 bg-white"></div>
+                     <div className="w-10 h-10 bg-white"></div>
                    ) : isTranscribing ? (
-                     <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                     <div className="w-10 h-10 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
                    ) : (
-                     <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                     <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                      </svg>
                    )}
                  </button>
                ) : (
                  <button
                    onClick={handleEndInterview}
-                   className="bg-black text-white px-10 py-5 font-black uppercase tracking-widest text-xl shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+                   className="bg-black text-white px-12 py-6 font-black uppercase tracking-widest text-2xl shadow-[10px_10px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
                  >
-                   View Final Report
+                   View Results
                  </button>
                )}
             </div>
             
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">
-               {isRecording ? 'Tap to finish' : isTranscribing ? 'Processing...' : 'Click mic to explain'}
+            <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.4em]">
+               {isRecording ? 'Stop' : isTranscribing ? 'Analyzing' : 'Explain to Alex'}
             </p>
           </div>
         </div>

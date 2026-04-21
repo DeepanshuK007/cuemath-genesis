@@ -82,21 +82,28 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* The Journey */}
       <section className="py-32 bg-white relative overflow-hidden">
-        {/* Background Decorative Element */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full -translate-x-1/2 translate-y-1/2 blur-3xl"></div>
+        {/* Background Decorative Art */}
+        <div className="absolute top-0 right-0 w-1/3 opacity-5 pointer-events-none translate-x-1/4">
+           <img src="/math-art.png" alt="" className="w-full h-auto" />
+        </div>
+        <div className="absolute bottom-0 left-0 w-1/4 opacity-10 pointer-events-none -translate-x-1/4 translate-y-1/4">
+           <img src="/tutor-art.png" alt="" className="w-full h-auto rotate-12" />
+        </div>
 
         <div className="max-w-6xl mx-auto px-8 relative z-10">
           <div className="text-center mb-24">
-             <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">The Journey</span>
-             <h2 className="text-4xl md:text-5xl font-serif font-bold text-black">
+             <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">The Process</span>
+             <h2 className="text-4xl md:text-6xl font-serif font-bold text-black">
                How to become a <span className="text-primary italic">Cuemath Elite.</span>
              </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-3 gap-12 relative">
+            {/* Connector Line (Desktop) */}
+            <div className="hidden md:block absolute top-1/2 left-0 w-full h-[2px] bg-gray-100 -translate-y-1/2 z-0"></div>
+            
             {[
               {
                 step: "01",
@@ -129,18 +136,18 @@ export default function LandingPage() {
                 )
               }
             ].map((item, i) => (
-              <div key={item.step} className="group relative">
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary to-accent rounded-3xl blur opacity-0 group-hover:opacity-10 transition duration-500"></div>
-                <div className="relative bg-white rounded-2xl p-8 border border-gray-100 shadow-sm group-hover:shadow-xl group-hover:-translate-y-2 transition-all duration-300">
+              <div key={item.step} className="group relative z-10">
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary to-accent rounded-none blur opacity-0 group-hover:opacity-10 transition duration-500"></div>
+                <div className="relative bg-white rounded-none border-2 border-black p-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[12px_12px_0px_0px_rgba(56,31,240,1)] group-hover:-translate-x-1 group-hover:-translate-y-1 transition-all duration-300">
                   <div className="flex items-center justify-between mb-8">
-                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+                     <div className="w-14 h-14 bg-black rounded-none flex items-center justify-center text-white group-hover:bg-primary transition-colors duration-500">
                         {item.icon}
                      </div>
-                     <span className="text-4xl font-black text-gray-200 group-hover:text-primary/20 transition-colors">
+                     <span className="text-5xl font-black text-gray-100 group-hover:text-primary/20 transition-colors">
                         {item.step}
                      </span>
                   </div>
-                  <h3 className="text-xl font-sans font-bold text-black mb-4">
+                  <h3 className="text-2xl font-serif font-bold text-black mb-4 uppercase tracking-tight">
                     {item.title}
                   </h3>
                   <p className="text-gray-500 font-sans text-sm leading-relaxed">
@@ -154,19 +161,24 @@ export default function LandingPage() {
       </section>
 
       {/* What We Look For */}
-      <section className="py-32 bg-cream/30">
-        <div className="max-w-6xl mx-auto px-8">
-          <div className="text-center mb-20">
-            <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">The DNA</span>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-black mb-6">
-              What we're <span className="text-primary italic">looking for.</span>
+      <section className="py-32 bg-cream relative overflow-hidden">
+        {/* Background Art */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full opacity-[0.03] pointer-events-none">
+           <img src="/math-art.png" alt="" className="w-full scale-150" />
+        </div>
+
+        <div className="max-w-6xl mx-auto px-8 relative z-10">
+          <div className="text-center mb-24">
+            <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">The Teaching DNA</span>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold text-black mb-6">
+              What we're <span className="text-primary italic underline decoration-black decoration-4">looking for.</span>
             </h2>
-            <p className="text-gray-500 font-sans text-lg max-w-2xl mx-auto">
-              It's not just about knowing math—it's about the <span className="text-black font-bold">art of teaching it.</span>
+            <p className="text-gray-500 font-sans text-xl max-w-2xl mx-auto leading-relaxed">
+              It's not just about knowing math—it's about the <span className="text-black font-black italic">art of teaching it.</span>
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[
               { title: "Warmth", desc: "Do you make students feel supported and encouraged?", icon: "❤️" },
               { title: "Clarity", desc: "Can you explain complex ideas in simple ways?", icon: "💎" },
@@ -175,11 +187,11 @@ export default function LandingPage() {
               { title: "Fluency", desc: "Can you communicate clearly and confidently?", icon: "🗣️" },
               { title: "Passion", desc: "Do you genuinely love helping students grow?", icon: "🔥" }
             ].map((item, i) => (
-              <div key={i} className="group bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="text-3xl mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+              <div key={i} className="group bg-white border-2 border-black p-10 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(255,107,74,1)] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300">
+                <div className="text-4xl mb-8 grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-sans font-bold text-black mb-3">{item.title}</h3>
+                <h3 className="text-2xl font-serif font-bold text-black mb-4 uppercase tracking-tighter">{item.title}</h3>
                 <p className="text-gray-500 font-sans text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}

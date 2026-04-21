@@ -305,20 +305,26 @@ export default function TestimonialLibrary() {
       </main>
 
       {/* Footer CTA */}
-      <section className="bg-gray-100 py-12">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">
-            Want to Be Featured?
-          </h3>
-          <p className="text-gray-600 font-sans mb-6">
-            Ace your interview and your explanation could be here.
-          </p>
-          <Link
-            to="/signup"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full font-sans font-semibold transition"
-          >
-            Apply Now
-          </Link>
+      <section className="bg-white py-24 border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-8">
+           <div className="bg-black text-white p-12 text-center shadow-[12px_12px_0px_0px_rgba(56,31,240,1)]">
+              <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">The Next Generation</span>
+              <h3 className="text-3xl md:text-4xl font-serif font-bold mb-6">
+                Want to be <span className="text-primary italic">Featured?</span>
+              </h3>
+              <p className="text-gray-400 font-sans text-lg mb-10 max-w-xl mx-auto">
+                Ace your interview and your explanation could be here. Join our community of world-class educators today.
+              </p>
+              <Link
+                to="/signup"
+                className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white px-10 py-5 font-black uppercase tracking-widest text-lg transition-all active:scale-95 shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)]"
+              >
+                Apply Now
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+           </div>
         </div>
       </section>
     </div>
