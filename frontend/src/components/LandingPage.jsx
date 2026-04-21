@@ -9,28 +9,31 @@ export default function LandingPage() {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-2 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
-            <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
+          <div className="flex items-center">
+            <div className="flex items-center gap-3 border border-black px-4 py-2 bg-white">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-8 w-auto" />
+              <div className="h-4 w-[1px] bg-black"></div>
+              <span className="font-sans text-[10px] text-black font-black tracking-[0.2em] uppercase">Genesis</span>
+            </div>
             {isSignedIn && (
-              <div className="ml-4 px-3 py-1.5 border border-black bg-gray-50 rounded-none">
-                <span className="text-xs text-black font-bold uppercase tracking-wide">Hi, {user?.name || user?.email?.split('@')[0]}</span>
+              <div className="ml-2 px-4 py-2 border border-black bg-gray-50">
+                <span className="text-xs text-black font-bold uppercase tracking-widest">Hi, {user?.name || user?.email?.split('@')[0]}</span>
               </div>
             )}
           </div>
-          <nav className="flex gap-4 items-center">
-            <Link to="/testimonials" className="text-black border-2 border-black hover:bg-black hover:text-white px-4 py-2 rounded-none transition-all duration-300 font-athletics font-bold uppercase text-xs tracking-widest">
+          <nav className="flex gap-2 items-center">
+            <Link to="/testimonials" className="text-black border border-black hover:bg-black hover:text-white px-6 py-2 transition-all duration-300 font-athletics font-bold uppercase text-xs tracking-widest">
               Testimonials
             </Link>
             {isSignedIn ? (
               <button
                 onClick={signOut}
-                className="text-white bg-black hover:bg-gray-800 px-4 py-2 rounded-none transition-all duration-300 font-sans font-bold uppercase text-xs tracking-widest"
+                className="text-white bg-black hover:bg-gray-800 border border-black px-6 py-2 transition-all duration-300 font-sans font-bold uppercase text-xs tracking-widest"
               >
                 Sign Out
               </button>
             ) : (
-              <Link to="/signin" className="text-white bg-black hover:bg-gray-800 px-4 py-2 rounded-none transition-all duration-300 font-athletics font-bold uppercase text-xs tracking-widest">
+              <Link to="/signin" className="text-white bg-black hover:bg-gray-800 border border-black px-6 py-2 transition-all duration-300 font-athletics font-bold uppercase text-xs tracking-widest">
                 Sign In
               </Link>
             )}
