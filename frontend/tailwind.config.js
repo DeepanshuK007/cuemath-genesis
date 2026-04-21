@@ -17,6 +17,7 @@ export default {
       fontFamily: {
         serif: ['Playfair Display', 'Georgia', 'serif'],
         sans: ['Inter', 'DM Sans', 'system-ui', 'sans-serif'],
+        athletics: ['Outfit', 'sans-serif'],
       },
     },
   },
