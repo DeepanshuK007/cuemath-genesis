@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { API_BASE } from '../services/api'
 
 export default function TestimonialLibrary() {
@@ -84,16 +84,25 @@ export default function TestimonialLibrary() {
   return (
     <div className="min-h-screen bg-cream">
       {/* Success Animation Banner */}
-      {showSuccess && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 animate-[bounce_1s_ease-in-out]">
-          <div className="bg-green-500 text-white px-8 py-4 rounded-full shadow-2xl flex items-center gap-3">
-            <div className="w-8 h-8 bg-white text-green-500 rounded-full flex items-center justify-center">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+      <AnimatePresence>
+        {showSuccess && (
+          <motion.div 
+            initial={{ y: -100, x: '-50%', opacity: 0 }}
+            animate={{ y: 0, x: '-50%', opacity: 1 }}
+            exit={{ y: -100, x: '-50%', opacity: 0 }}
+            className="fixed top-24 left-1/2 z-50"
+          >
+            <div className="bg-green-500 border-2 border-black text-white px-8 py-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center gap-4">
+              <div className="w-10 h-10 bg-white border-2 border-black text-green-500 flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span className="font-black uppercase tracking-widest text-sm">Payment Successful! Library Unlocked.</span>
             </div>
-            <span className="font-sans font-bold text-lg">Payment Successful! Library Unlocked.</span>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-6">

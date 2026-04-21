@@ -195,13 +195,13 @@ export default function InterviewRoom() {
   return (
     <div className="min-h-screen bg-cream flex flex-col font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-3 px-6">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-3 items-center">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
             <div className="h-4 w-[1px] bg-gray-300"></div>
-            <span className="text-[10px] font-black tracking-[0.3em] text-black uppercase">GENESIS</span>
+            <span className="text-[10px] font-black tracking-[0.4em] text-black uppercase">GENESIS</span>
           </div>
 
           {/* Centered User Badge */}
@@ -251,40 +251,40 @@ export default function InterviewRoom() {
         </aside>
 
         {/* Right Content: Interaction Area */}
-        <div className="flex flex-col h-full border-2 border-black bg-white shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
+        <div className="flex flex-col h-full border-2 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
           {/* Background Decorative Art */}
-          <div className="absolute top-0 right-0 w-32 h-32 opacity-[0.03] pointer-events-none">
+          <div className="absolute top-0 right-0 w-24 h-24 opacity-[0.03] pointer-events-none">
              <img src="/math-art.png" alt="" className="w-full h-auto" />
           </div>
 
           {error && (
-            <div className="bg-red-50 border-b-2 border-red-500 p-4 text-[10px] font-black text-red-700 uppercase tracking-widest text-center animate-pulse">
+            <div className="bg-red-50 border-b-2 border-red-500 p-3 text-[9px] font-black text-red-700 uppercase tracking-widest text-center animate-pulse">
               {error}
             </div>
           )}
 
           {/* Alex's Message Area */}
-          <div className="flex-1 flex flex-col items-center justify-center p-12 text-center">
-            <div className="relative mb-10">
-               <div className={`w-32 h-32 rounded-none border-2 border-black flex items-center justify-center transition-all duration-500 bg-white ${isAITalking ? 'shadow-[8px_8px_0px_0px_rgba(255,107,74,1)] scale-105' : 'shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]'}`}>
-                  <span className="text-5xl">👦</span>
+          <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
+            <div className="relative mb-8">
+               <div className={`w-24 h-24 rounded-none border-2 border-black flex items-center justify-center transition-all duration-500 bg-white ${isAITalking ? 'shadow-[6px_6px_0px_0px_rgba(255,107,74,1)] scale-105' : 'shadow-[2px_2px_0px_0px_rgba(0,0,0,0.1)]'}`}>
+                  <span className="text-4xl">👦</span>
                </div>
                {isAITalking && (
-                 <div className="absolute -top-4 -right-4 bg-accent text-white text-[9px] font-black px-2 py-1 uppercase tracking-widest animate-bounce">
+                 <div className="absolute -top-3 -right-3 bg-accent text-white text-[8px] font-black px-2 py-1 uppercase tracking-widest animate-bounce">
                     Speaking
                  </div>
                )}
             </div>
 
             <div className="max-w-md mx-auto">
-              <p className="text-2xl md:text-3xl font-serif font-medium text-black leading-tight italic">
+              <p className="text-xl md:text-2xl font-serif font-medium text-black leading-tight italic">
                 "{currentAIMessage || lastAIMessage || "Ready when you are..."}"
               </p>
             </div>
           </div>
 
           {/* Interaction Bar */}
-          <div className="border-t-2 border-black p-8 flex flex-col items-center gap-6 bg-gray-50/50">
+          <div className="border-t-2 border-black p-6 flex flex-col items-center gap-4 bg-gray-50/50">
             <div className="flex items-center gap-4">
                {stage !== 'end' ? (
                  <button
