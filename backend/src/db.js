@@ -6,7 +6,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const sqlite = sqlite3.verbose();
-const dbPath = path.resolve(__dirname, '../database.sqlite');
+const dbPath = process.env.DATABASE_PATH 
+  ? path.resolve(process.env.DATABASE_PATH)
+  : path.resolve(__dirname, '../database.sqlite');
 const db = new sqlite.Database(dbPath, (err) => {
   if (err) {
     console.error('Error opening database', err.message);
