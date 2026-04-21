@@ -79,48 +79,72 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-serif font-bold text-center text-black mb-16">
-            How It Works
-          </h2>
+      <section className="py-32 bg-white relative overflow-hidden">
+        {/* Background Decorative Element */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full -translate-x-1/2 translate-y-1/2 blur-3xl"></div>
+
+        <div className="max-w-6xl mx-auto px-8 relative z-10">
+          <div className="text-center mb-24">
+             <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-4">The Journey</span>
+             <h2 className="text-4xl md:text-5xl font-serif font-bold text-black">
+               How to become a <span className="text-primary italic">Cuemath Elite.</span>
+             </h2>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-black">1</span>
+            {[
+              {
+                step: "01",
+                title: "Apply Online",
+                desc: "Share your experience and teaching passion in a quick 2-minute form.",
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                )
+              },
+              {
+                step: "02",
+                title: "AI Interview",
+                desc: "Meet Alex, our AI student. Show your patience and clarity in a live voice session.",
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                  </svg>
+                )
+              },
+              {
+                step: "03",
+                title: "Start Teaching",
+                desc: "Get deep pedagogical feedback and join our community of world-class educators.",
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                )
+              }
+            ].map((item, i) => (
+              <div key={item.step} className="group relative">
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary to-accent rounded-3xl blur opacity-0 group-hover:opacity-10 transition duration-500"></div>
+                <div className="relative bg-white rounded-2xl p-8 border border-gray-100 shadow-sm group-hover:shadow-xl group-hover:-translate-y-2 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-8">
+                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+                        {item.icon}
+                     </div>
+                     <span className="text-4xl font-black text-gray-100 group-hover:text-primary/10 transition-colors">
+                        {item.step}
+                     </span>
+                  </div>
+                  <h3 className="text-xl font-sans font-bold text-black mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 font-sans text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-sans font-semibold text-black mb-3">
-                Apply Online
-              </h3>
-              <p className="text-dark font-sans">
-                Fill out a simple form with your details and experience.
-                Takes just 2 minutes.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-black">2</span>
-              </div>
-              <h3 className="text-xl font-sans font-semibold text-black mb-3">
-                AI Interview
-              </h3>
-              <p className="text-dark font-sans">
-                Have a friendly voice conversation with our AI.
-                Show us your teaching style.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-black">3</span>
-              </div>
-              <h3 className="text-xl font-sans font-semibold text-black mb-3">
-                Start Teaching
-              </h3>
-              <p className="text-dark font-sans">
-                Get detailed feedback and join our community of
-                exceptional tutors.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -180,15 +204,24 @@ export default function LandingPage() {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-8 w-auto invert brightness-0" />
-            <span className="font-bold text-[10px]">GENESIS</span>
+      <footer className="py-20 border-t border-gray-100 bg-white">
+        <div className="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-12">
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <div className="flex items-center gap-3 grayscale opacity-50">
+              <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
+              <div className="h-4 w-[1px] bg-gray-300"></div>
+              <span className="font-sans font-black text-[10px] tracking-widest text-slate uppercase">Genesis</span>
+            </div>
+            <p className="text-gray-400 font-sans text-xs uppercase tracking-[0.2em] font-bold">
+              © 2026 Cuemath • Scaling Excellence
+            </p>
           </div>
-          <p className="text-gray-400 font-sans text-sm">
-            Scaling great math education through AI-powered hiring.
-          </p>
+
+          <div className="text-center md:text-right max-w-sm">
+            <p className="text-gray-500 font-sans text-sm font-medium leading-relaxed">
+              Empowering the world's best educators through high-fidelity AI simulations.
+            </p>
+          </div>
         </div>
       </footer>
       <style dangerouslySetInnerHTML={{ __html: `
