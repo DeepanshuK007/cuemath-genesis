@@ -1,34 +1,29 @@
-import { Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-
-export default function LandingPage() {
-  const { user, isSignedIn, signOut } = useAuth()
-
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream font-sans text-slate overflow-hidden">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-6 py-2 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
-            <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
+      <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 py-4 px-8 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-8 w-auto" />
+            <div className="h-4 w-[1px] bg-gray-300 mx-1"></div>
+            <span className="font-heading font-black text-[12px] tracking-widest text-primary uppercase">Genesis</span>
           </div>
-          <nav className="flex gap-6 items-center">
-            <Link to="/testimonials" className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-athletics font-bold uppercase text-sm tracking-wide">
+          <nav className="flex gap-8 items-center">
+            <Link to="/testimonials" className="text-xs font-black uppercase tracking-widest text-gray-400 hover:text-primary transition-colors">
               Testimonials
             </Link>
             {isSignedIn ? (
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-black">Hi, {user?.name || user?.email?.split('@')[0]}</span>
+              <div className="flex items-center gap-6">
+                <span className="text-xs font-bold text-slate">Hi, {user?.name || user?.email?.split('@')[0]}</span>
                 <button
                   onClick={signOut}
-                  className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-sans text-sm"
+                  className="px-4 py-2 bg-slate text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-lg shadow-slate/10"
                 >
                   Sign Out
                 </button>
               </div>
             ) : (
-              <Link to="/signin" className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-athletics font-bold uppercase text-sm tracking-wide">
+              <Link to="/signin" className="px-6 py-2 border-2 border-slate text-slate rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate hover:text-white transition-all">
                 Sign In
               </Link>
             )}
@@ -37,116 +32,89 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-32 bg-cream">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-slate">
         <video 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="absolute inset-0 w-full h-full object-cover opacity-90"
+          className="absolute inset-0 w-full h-full object-cover opacity-40 scale-105"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream/30 to-cream"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate via-slate/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate/60 via-transparent to-slate/60"></div>
         
-        <div className="max-w-6xl mx-auto px-6 text-center relative">
-          <h1 className="text-5xl md:text-8xl font-athletics font-black text-black mb-6 drop-shadow-md tracking-tighter uppercase leading-[0.9]">
+        <div className="max-w-7xl mx-auto px-6 text-center relative z-10 animate-fade-in">
+          <div className="inline-block px-4 py-1.5 bg-primary/20 backdrop-blur-sm rounded-full text-primary-light text-[10px] font-black uppercase tracking-widest mb-8 border border-primary/30">
+             Elite Tutor Program 2026
+          </div>
+          <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-8 tracking-tighter uppercase leading-[0.85]">
             Become a<br />
-            <span className="text-primary">Cuemath Tutor</span>
+            <span className="text-primary italic">Cuemath Tutor.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-dark max-w-2xl mx-auto mb-10 font-sans font-medium drop-shadow-sm">
-            Teach math, inspire minds. <br className="hidden md:block" />
-            Join our elite tutor community in minutes.
+          <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
+            Join the world's most elite math education platform. 
+            Apply in minutes and start your journey today.
           </p>
-          <Link
-            to={isSignedIn ? "/topic" : "/signup"}
-            className="group relative overflow-hidden inline-flex items-center gap-2 bg-primary text-black px-10 py-5 rounded-none font-untitled font-semibold text-xl transition-all duration-500 shadow-xl hover:shadow-2xl"
-          >
-            {/* Door animation panels */}
-            <span className="absolute inset-y-0 left-0 w-[51%] bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
-            <span className="absolute inset-y-0 right-0 w-[51%] bg-black translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
-            
-            {/* Button Content */}
-            <span className="relative z-10 flex items-center gap-2 group-hover:text-primary transition-colors duration-500">
-              {isSignedIn ? "Continue Your Journey" : "Start Your Journey"}
-              <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </span>
-          </Link>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-serif font-bold text-center text-black mb-16">
-            How It Works
-          </h2>
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-black">1</span>
-              </div>
-              <h3 className="text-xl font-sans font-semibold text-black mb-3">
-                Apply Online
-              </h3>
-              <p className="text-dark font-sans">
-                Fill out a simple form with your details and experience.
-                Takes just 2 minutes.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-black">2</span>
-              </div>
-              <h3 className="text-xl font-sans font-semibold text-black mb-3">
-                AI Interview
-              </h3>
-              <p className="text-dark font-sans">
-                Have a friendly voice conversation with our AI.
-                Show us your teaching style.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-black">3</span>
-              </div>
-              <h3 className="text-xl font-sans font-semibold text-black mb-3">
-                Start Teaching
-              </h3>
-              <p className="text-dark font-sans">
-                Get detailed feedback and join our community of
-                exceptional tutors.
-              </p>
-            </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <Link
+              to={isSignedIn ? "/topic" : "/signup"}
+              className="group relative px-10 py-5 bg-primary text-white rounded-2xl font-heading font-black text-xl uppercase tracking-tight transition-all hover:scale-105 hover:bg-primary-dark shadow-2xl shadow-primary/40 overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                {isSignedIn ? "Continue Application" : "Start Your Application"}
+                <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+            </Link>
+            <Link to="/testimonials" className="text-white/60 hover:text-white text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2">
+               Watch Tutor Stories
+               <div className="w-8 h-[1px] bg-white/20"></div>
+            </Link>
           </div>
         </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+           <div className="w-[1px] h-12 bg-white"></div>
+        </div>
       </section>
 
-      {/* What We Look For */}
-      <section className="py-20 bg-cream">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-serif font-bold text-center text-black mb-4">
-            What We're Looking For
-          </h2>
-          <p className="text-center text-dark max-w-2xl mx-auto mb-16 font-sans">
-            It's not just about knowing math — it's about how you teach it.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Features Section */}
+      <section className="py-32 bg-white relative">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
+             <div className="max-w-2xl">
+                <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em] block mb-4">The Cuemath Advantage</span>
+                <h2 className="text-4xl md:text-6xl font-heading font-black text-slate leading-tight">
+                  What we look for in our <span className="text-gray-300">Elite Tutors.</span>
+                </h2>
+             </div>
+             <p className="text-gray-500 font-medium max-w-sm">
+                Our selection process is rigorous, focusing on the human elements that make a great educator.
+             </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: 'Warmth', desc: 'Do you make students feel supported and encouraged?' },
-              { title: 'Clarity', desc: 'Can you explain complex ideas in simple ways?' },
-              { title: 'Patience', desc: 'Do you stay calm when students struggle?' },
-              { title: 'Simplicity', desc: 'Do you avoid jargon and use relatable examples?' },
-              { title: 'Fluency', desc: 'Can you communicate clearly in English?' },
-              { title: 'Passion', desc: 'Do you genuinely love helping students learn?' },
-            ].map((item) => (
-              <div key={item.title} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                <h3 className="text-lg font-sans font-semibold text-primary mb-2">
+              { title: 'Warmth', desc: 'Making every student feel safe and supported.', icon: '♥' },
+              { title: 'Clarity', desc: 'Explaining the "Why" behind every "What".', icon: '✦' },
+              { title: 'Patience', desc: 'Staying calm in the face of confusion.', icon: '☯' },
+              { title: 'Simplicity', desc: 'Using kid-friendly analogies for big ideas.', icon: '◎' },
+              { title: 'Fluency', desc: 'Clear, professional English communication.', icon: '✎' },
+              { title: 'Passion', desc: 'A genuine love for teaching mathematics.', icon: '☀' },
+            ].map((item, i) => (
+              <div key={item.title} className="group bg-cream rounded-[32px] p-10 transition-all hover:bg-white hover:shadow-2xl hover:shadow-primary/5 border border-transparent hover:border-gray-100">
+                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-2xl mb-8 shadow-sm group-hover:scale-110 transition-transform">
+                   {item.icon}
+                </div>
+                <h3 className="text-xl font-heading font-black text-slate mb-4 uppercase tracking-tight">
                   {item.title}
                 </h3>
-                <p className="text-dark font-sans text-sm">
+                <p className="text-gray-500 font-medium leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -155,41 +123,52 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA Section */}
       {!isSignedIn && (
-        <section className="bg-primary py-20">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-serif font-bold text-white mb-6">
-              Ready to Make Math Fun?
-            </h2>
-            <p className="text-white/80 text-lg mb-10 font-sans">
-              Join hundreds of tutors who are already inspiring young minds.
-            </p>
-            <Link
-              to="/signup"
-              className="inline-flex items-center gap-2 bg-accent hover:bg-orange-500 text-white px-8 py-4 rounded-full font-sans font-semibold text-lg transition shadow-lg"
-            >
-              Apply Now
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </div>
+        <section className="py-20 px-8">
+           <div className="max-w-7xl mx-auto bg-primary rounded-[48px] p-12 md:p-24 relative overflow-hidden text-center">
+              <div className="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+              <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/20 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"></div>
+              
+              <h2 className="text-4xl md:text-7xl font-heading font-black text-white mb-10 leading-tight relative z-10">
+                Ready to inspire the<br />next generation?
+              </h2>
+              <Link
+                to="/signup"
+                className="inline-flex items-center gap-3 bg-white text-primary px-12 py-6 rounded-3xl font-heading font-black text-xl uppercase tracking-tight transition-all hover:scale-105 hover:bg-cream shadow-2xl relative z-10"
+              >
+                Join the Mission
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+           </div>
         </section>
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-8 w-auto invert brightness-0" />
-            <span className="font-bold text-[10px]">GENESIS</span>
+      <footer className="py-12 border-t border-gray-100 bg-white">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-3 grayscale opacity-40">
+            <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
+            <span className="font-heading font-black text-[10px] tracking-widest text-slate uppercase">Genesis</span>
           </div>
-          <p className="text-gray-400 font-sans text-sm">
-            Scaling great math education through AI-powered hiring.
+          <p className="text-gray-400 font-bold text-[10px] uppercase tracking-[0.2em]">
+            © 2026 Cuemath Genesis • Scaling Excellence
           </p>
+          <div className="flex gap-6">
+             <a href="#" className="text-[10px] font-black text-gray-300 hover:text-primary uppercase tracking-widest transition-colors">Privacy</a>
+             <a href="#" className="text-[10px] font-black text-gray-300 hover:text-primary uppercase tracking-widest transition-colors">Terms</a>
+          </div>
         </div>
       </footer>
+      
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      `}} />
     </div>
   )
-}
