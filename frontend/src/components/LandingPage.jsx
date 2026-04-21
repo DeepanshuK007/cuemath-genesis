@@ -132,7 +132,7 @@ export default function LandingPage() {
                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-500">
                         {item.icon}
                      </div>
-                     <span className="text-4xl font-black text-gray-100 group-hover:text-primary/10 transition-colors">
+                     <span className="text-4xl font-black text-gray-200 group-hover:text-primary/20 transition-colors">
                         {item.step}
                      </span>
                   </div>
