@@ -20,7 +20,7 @@ export default function TestimonialLibrary() {
     setTestimonials([
       {
         id: 1,
-        tutorName: 'Priya Sharma',
+        tutorName: 'Tamanna Kothari',
         topic: 'Explaining fractions to a 9-year-old',
         rating: 4.8,
         views: '1,204',
@@ -178,7 +178,7 @@ export default function TestimonialLibrary() {
                   alt={tutorial.tutorName}
                   className={`w-full h-full object-cover ${
                     tutorial.tutorName === 'Ananya Patel' ? 'object-[50%_20%]' : 
-                    tutorial.tutorName === 'Priya Sharma' ? 'object-[50%_35%]' : 
+                    tutorial.tutorName === 'Tamanna Kothari' ? 'object-[50%_35%]' : 
                     'object-center'
                   }`}
                 />
