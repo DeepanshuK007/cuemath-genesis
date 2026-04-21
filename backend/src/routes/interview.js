@@ -125,10 +125,14 @@ router.post('/end', (req, res) => {
 
 // POST /api/interview/chat - Dynamic AI Conversation
 router.post('/chat', async (req, res) => {
-  try {
-    const { topic, conversationHistory } = req.body
+    // Diagnostic Logs (Safe)
+    console.log('🔍 AI Service Check:', {
+      hasGemini: !!process.env.GEMINI_API_KEY,
+      geminiLength: process.env.GEMINI_API_KEY?.length || 0,
+      hasGroq: !!process.env.GROQ_API_KEY,
+      groqLength: process.env.GROQ_API_KEY?.length || 0
+    })
 
-    // Determine which AI service to use (priority: Gemini > Groq > OpenAI)
     const useGemini = process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.length > 10
     const useGroq = !useGemini && process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.length > 10
 
