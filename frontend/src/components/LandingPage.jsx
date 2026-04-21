@@ -11,24 +11,24 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <img src="/cuemath-logo.png" alt="Cuemath Logo" className="h-10 w-auto" />
-            <span className="font-sans text-sm text-navy font-bold ml-1 tracking-tight">GENESIS</span>
+            <span className="font-sans text-sm text-black font-bold ml-1 tracking-tight">GENESIS</span>
           </div>
           <nav className="flex gap-6 items-center">
-            <Link to="/testimonials" className="text-navy hover:text-primary transition font-medium">
+            <Link to="/testimonials" className="text-black hover:text-primary transition font-medium">
               Testimonials
             </Link>
             {isSignedIn ? (
               <div className="flex items-center gap-4">
-                <span className="text-sm text-navy">Hi, {user?.name || user?.email?.split('@')[0]}</span>
+                <span className="text-sm text-black">Hi, {user?.name || user?.email?.split('@')[0]}</span>
                 <button
                   onClick={signOut}
-                  className="text-navy hover:text-primary transition font-sans text-sm"
+                  className="text-black hover:text-primary transition font-sans text-sm"
                 >
                   Sign Out
                 </button>
               </div>
             ) : (
-              <Link to="/signin" className="text-navy hover:text-primary transition font-medium">
+              <Link to="/signin" className="text-black hover:text-primary transition font-medium">
                 Sign In
               </Link>
             )}
@@ -50,7 +50,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream/30 to-cream"></div>
         
         <div className="max-w-6xl mx-auto px-6 text-center relative">
-          <h1 className="text-5xl md:text-7xl font-serif font-bold text-navy mb-6 drop-shadow-md">
+          <h1 className="text-5xl md:text-7xl font-serif font-bold text-black mb-6 drop-shadow-md">
             Become a<br />
             <span className="text-primary">Cuemath Tutor</span>
           </h1>
@@ -60,7 +60,7 @@ export default function LandingPage() {
           </p>
           <Link
             to={isSignedIn ? "/topic" : "/signup"}
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-navy px-8 py-4 rounded-full font-sans font-bold text-lg transition shadow-xl hover:shadow-2xl hover:-translate-y-1"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-black px-8 py-4 rounded-full font-sans font-bold text-lg transition shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
             {isSignedIn ? "Continue Your Journey" : "Start Your Journey"}
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,15 +73,15 @@ export default function LandingPage() {
       {/* How It Works */}
       <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-serif font-bold text-center text-navy mb-16">
+          <h2 className="text-3xl font-serif font-bold text-center text-black mb-16">
             How It Works
           </h2>
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-navy">1</span>
+              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-black">1</span>
               </div>
-              <h3 className="text-xl font-sans font-semibold text-navy mb-3">
+              <h3 className="text-xl font-sans font-semibold text-black mb-3">
                 Apply Online
               </h3>
               <p className="text-dark font-sans">
@@ -90,10 +90,10 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-navy">2</span>
+              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-black">2</span>
               </div>
-              <h3 className="text-xl font-sans font-semibold text-navy mb-3">
+              <h3 className="text-xl font-sans font-semibold text-black mb-3">
                 AI Interview
               </h3>
               <p className="text-dark font-sans">
@@ -102,10 +102,10 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-bold text-navy">3</span>
+              <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl font-bold text-black">3</span>
               </div>
-              <h3 className="text-xl font-sans font-semibold text-navy mb-3">
+              <h3 className="text-xl font-sans font-semibold text-black mb-3">
                 Start Teaching
               </h3>
               <p className="text-dark font-sans">
@@ -120,7 +120,7 @@ export default function LandingPage() {
       {/* What We Look For */}
       <section className="py-20 bg-cream">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-serif font-bold text-center text-navy mb-4">
+          <h2 className="text-3xl font-serif font-bold text-center text-black mb-4">
             What We're Looking For
           </h2>
           <p className="text-center text-dark max-w-2xl mx-auto mb-16 font-sans">
