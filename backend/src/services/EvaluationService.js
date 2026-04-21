@@ -1,18 +1,14 @@
-import OpenAI from 'openai'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
-const useGemini = process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.length > 10
-const useGroq = !useGemini && process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.length > 10
-
-const openai = useGroq
-  ? new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: 'https://api.groq.com/openai/v1' })
-  : new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-
-const genAI = useGemini ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null
-const model = useGroq ? 'llama-3.3-70b-versatile' : 'gpt-4o-mini'
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 
 class EvaluationService {
   async analyzeTranscript(transcript, topic) {
+    // Diagnostic Logs (Safe)
+    console.log('🔍 Evaluation AI Service Check:', {
+      hasGeminiKey: !!process.env.GEMINI_API_KEY
+    })
+
     try {
       const prompt = `You are an expert tutor evaluator for Cuemath, an elite math education platform.
 Your job is to analyze the following transcript between a Tutor and a 10-year-old student named Alex.
@@ -50,21 +46,9 @@ Important:
 - Feedback should be constructive and specific to what was said.
 - "bestQuotes" should be the most impressive lines from the tutor.`
 
-      let result
-
-      if (useGemini) {
-        const geminiModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
-        const geminiResult = await geminiModel.generateContent(prompt)
-        result = geminiResult.response.text()
-      } else {
-        const response = await openai.chat.completions.create({
-          model: model,
-          messages: [{ role: 'system', content: prompt }],
-          response_format: { type: 'json_object' },
-          temperature: 0.5,
-        })
-        result = response.choices[0].message.content
-      }
+      const geminiModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+      const geminiResult = await geminiModel.generateContent(prompt)
+      const result = geminiResult.response.text()
 
       return JSON.parse(result)
     } catch (error) {
