@@ -186,7 +186,7 @@ export default function InterviewRoom() {
   return (
     <div className="min-h-screen bg-cream flex flex-col">
       {/* Header */}
-      <header className="bg-white shadow-sm py-4 px-6">
+      <header className="bg-white shadow-sm py-2 px-6">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
             <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-8 w-auto" />

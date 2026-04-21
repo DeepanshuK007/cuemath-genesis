@@ -96,7 +96,7 @@ export default function TestimonialLibrary() {
 
       {/* Header */}
       <header className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-6xl mx-auto px-6 py-2 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
             <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
             <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
