@@ -306,9 +306,24 @@ export default function TestimonialLibrary() {
                         <button
                           onClick={handleSubscribe}
                           disabled={isLoading}
-                          className="bg-black text-white px-10 py-4 text-[11px] font-black uppercase tracking-[0.2em] shadow-[6px_6px_0px_0px_rgba(255,107,74,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all disabled:opacity-50"
+                          className="relative overflow-hidden bg-black text-white px-10 py-4 text-[11px] font-black uppercase tracking-[0.2em] shadow-[6px_6px_0px_0px_rgba(255,107,74,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all disabled:opacity-50 min-w-[180px]"
                         >
-                          {isLoading ? 'Wait...' : 'Unlock Content'}
+                          <span className={isLoading ? 'opacity-0' : 'opacity-100'}>
+                            Unlock Content
+                          </span>
+                          {isLoading && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black">
+                              <span className="text-[8px] mb-2 animate-pulse">Processing...</span>
+                              <div className="w-24 h-1.5 bg-gray-800 border border-gray-700 overflow-hidden">
+                                <motion.div 
+                                  initial={{ x: '-100%' }}
+                                  animate={{ x: '0%' }}
+                                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                                  className="w-full h-full bg-primary"
+                                />
+                              </div>
+                            </div>
+                          )}
                         </button>
                       </div>
                     </div>
