@@ -293,10 +293,12 @@ export default function LandingPage() {
             <p className="text-gray-500 font-sans max-w-md leading-relaxed mb-8">
               Empowering the world's best educators through high-fidelity AI simulations. We believe teaching is an art form.
             </p>
-            <div className="text-[9px] font-black uppercase tracking-[0.5em] text-primary bg-primary/10 inline-block px-4 py-2 border border-primary/20">
+            <div className="text-[9px] font-black uppercase tracking-[0.5em] text-primary bg-primary/10 inline-block px-4 py-2 border border-primary/20 mb-8 md:mb-0">
               © 2026 Cuemath • Scaling Excellence
+            </div>
+          </div>
 
-          <div className="text-center md:text-right max-w-sm">
+          <div className="text-center md:text-right">
             <p className="text-gray-500 font-sans text-sm font-medium leading-relaxed">
               Empowering the world's best educators through high-fidelity AI simulations.
             </p>
