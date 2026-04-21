@@ -12,21 +12,23 @@ export default function LandingPage() {
           <div className="flex items-center gap-2">
             <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
             <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
+            {isSignedIn && (
+              <div className="ml-4 pl-4 border-l border-gray-200">
+                <span className="text-sm text-black font-medium">Hi, {user?.name || user?.email?.split('@')[0]}</span>
+              </div>
+            )}
           </div>
           <nav className="flex gap-6 items-center">
             <Link to="/testimonials" className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-athletics font-bold uppercase text-sm tracking-wide">
               Testimonials
             </Link>
             {isSignedIn ? (
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-black">Hi, {user?.name || user?.email?.split('@')[0]}</span>
-                <button
-                  onClick={signOut}
-                  className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-sans text-sm"
-                >
-                  Sign Out
-                </button>
-              </div>
+              <button
+                onClick={signOut}
+                className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-sans text-sm"
+              >
+                Sign Out
+              </button>
             ) : (
               <Link to="/signin" className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-athletics font-bold uppercase text-sm tracking-wide">
                 Sign In
