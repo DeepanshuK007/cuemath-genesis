@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
@@ -6,6 +6,13 @@ import { useAuth } from '../context/AuthContext'
 export default function LandingPage() {
   const navigate = useNavigate()
   const { user, isSignedIn, signOut } = useAuth()
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1.5
+    }
+  }, [])
 
   const revealVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -64,6 +71,7 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
