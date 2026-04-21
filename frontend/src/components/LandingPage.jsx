@@ -201,9 +201,17 @@ export default function LandingPage() {
             <h2 className="text-4xl md:text-6xl font-serif font-bold text-black mb-6">
               What we're <span className="text-primary italic underline decoration-black decoration-4">looking for.</span>
             </h2>
-            <p className="text-gray-500 font-sans text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="text-gray-500 font-sans text-xl max-w-2xl mx-auto leading-relaxed mb-6">
               It's not just about knowing math—it's about the <span className="text-black font-black italic">art of teaching it.</span>
             </p>
+            {/* Mobile Hint */}
+            <div className="md:hidden">
+               <div className="inline-block border-2 border-black bg-white px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] animate-pulse">
+                 <p className="text-[10px] font-black text-black uppercase tracking-widest">
+                   Touch cards for immersive experience
+                 </p>
+               </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
