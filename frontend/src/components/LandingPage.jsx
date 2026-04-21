@@ -41,13 +41,12 @@ export default function LandingPage() {
             exit={{ y: -100, x: '-50%', opacity: 0 }}
             className="fixed top-24 left-1/2 z-[100]"
           >
-            <div className="bg-black border-2 border-black text-white px-8 py-4 shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] flex items-center gap-4">
-              <div className="w-10 h-10 bg-white border-2 border-black text-black flex items-center justify-center">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
+            <div className="bg-black border-2 border-black text-white px-8 py-4 shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] flex items-center gap-6">
+              <div className="flex flex-col items-center">
+                <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto invert brightness-0" />
+                <span className="text-[7px] font-black tracking-[0.4em] text-white uppercase mt-0.5">GENESIS</span>
               </div>
-              <span className="font-black uppercase tracking-[0.2em] text-[11px]">Successfully Signed Out. Come back soon!</span>
+              <span className="font-black uppercase tracking-[0.2em] text-[11px] border-l border-gray-800 pl-6">Successfully Signed Out. Come back soon!</span>
             </div>
           </motion.div>
         )}

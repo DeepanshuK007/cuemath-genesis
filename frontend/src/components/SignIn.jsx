@@ -173,12 +173,19 @@ export default function SignIn() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-black text-white py-5 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 disabled:bg-gray-400 relative overflow-hidden"
+              className="w-full bg-black text-white py-6 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 disabled:bg-gray-400 relative overflow-hidden min-h-[72px]"
             >
               {isLoading ? (
-                <div className="relative z-10 flex items-center justify-center gap-3">
-                  <span className="animate-pulse">Authenticating</span>
-                  <div className="absolute bottom-0 left-0 h-1 bg-primary transition-all duration-[1500ms] ease-out" style={{ width: isLoading ? '100%' : '0%' }}></div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black">
+                  <span className="text-[10px] mb-2 animate-pulse text-gray-400">Authenticating...</span>
+                  <div className="w-32 h-1.5 bg-gray-800 border border-gray-700 overflow-hidden">
+                    <motion.div 
+                      initial={{ x: '-100%' }}
+                      animate={{ x: '0%' }}
+                      transition={{ duration: 1.5, ease: "easeInOut" }}
+                      className="w-full h-full bg-primary"
+                    />
+                  </div>
                 </div>
               ) : (
                 'Sign In'
