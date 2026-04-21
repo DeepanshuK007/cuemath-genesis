@@ -60,12 +60,19 @@ export default function LandingPage() {
           </p>
           <Link
             to={isSignedIn ? "/topic" : "/signup"}
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-black px-8 py-4 rounded-none font-sans font-bold text-lg transition shadow-xl hover:shadow-2xl hover:-translate-y-1"
+            className="group relative overflow-hidden inline-flex items-center gap-2 bg-primary text-black px-10 py-5 rounded-none font-sans font-bold text-xl transition-all duration-500 shadow-xl hover:shadow-2xl"
           >
-            {isSignedIn ? "Continue Your Journey" : "Start Your Journey"}
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
+            {/* Door animation panels */}
+            <span className="absolute inset-y-0 left-0 w-1/2 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
+            <span className="absolute inset-y-0 right-0 w-1/2 bg-black translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-0"></span>
+            
+            {/* Button Content */}
+            <span className="relative z-10 flex items-center gap-2 group-hover:text-primary transition-colors duration-500">
+              {isSignedIn ? "Continue Your Journey" : "Start Your Journey"}
+              <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
           </Link>
         </div>
       </section>
