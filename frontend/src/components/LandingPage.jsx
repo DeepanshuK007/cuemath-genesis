@@ -13,24 +13,24 @@ export default function LandingPage() {
             <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-10 w-auto" />
             <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
             {isSignedIn && (
-              <div className="ml-4 pl-4 border-l border-gray-200">
-                <span className="text-sm text-black font-medium">Hi, {user?.name || user?.email?.split('@')[0]}</span>
+              <div className="ml-4 px-3 py-1.5 border border-black bg-gray-50 rounded-none">
+                <span className="text-xs text-black font-bold uppercase tracking-wide">Hi, {user?.name || user?.email?.split('@')[0]}</span>
               </div>
             )}
           </div>
-          <nav className="flex gap-6 items-center">
-            <Link to="/testimonials" className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-athletics font-bold uppercase text-sm tracking-wide">
+          <nav className="flex gap-4 items-center">
+            <Link to="/testimonials" className="text-black border-2 border-black hover:bg-black hover:text-white px-4 py-2 rounded-none transition-all duration-300 font-athletics font-bold uppercase text-xs tracking-widest">
               Testimonials
             </Link>
             {isSignedIn ? (
               <button
                 onClick={signOut}
-                className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-sans text-sm"
+                className="text-white bg-black hover:bg-gray-800 px-4 py-2 rounded-none transition-all duration-300 font-sans font-bold uppercase text-xs tracking-widest"
               >
                 Sign Out
               </button>
             ) : (
-              <Link to="/signin" className="text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-athletics font-bold uppercase text-sm tracking-wide">
+              <Link to="/signin" className="text-white bg-black hover:bg-gray-800 px-4 py-2 rounded-none transition-all duration-300 font-athletics font-bold uppercase text-xs tracking-widest">
                 Sign In
               </Link>
             )}
