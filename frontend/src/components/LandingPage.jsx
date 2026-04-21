@@ -54,9 +54,9 @@ export default function LandingPage() {
             Become a<br />
             <span className="text-primary">Cuemath Tutor</span>
           </h1>
-          <p className="text-xl md:text-2xl text-dark max-w-2xl mx-auto mb-10 font-sans font-medium drop-shadow-sm">
-            Teach math, inspire minds. <br className="hidden md:block" />
-            Join our elite tutor community in minutes.
+          <p className="text-xl md:text-2xl text-dark/80 max-w-3xl mx-auto mb-12 font-sans font-medium drop-shadow-sm leading-relaxed">
+            Transform lives through the power of mathematics. <br className="hidden md:block" />
+            Join our elite community of educators and launch your career in minutes.
           </p>
           <Link
             to={isSignedIn ? "/topic" : "/signup"}
