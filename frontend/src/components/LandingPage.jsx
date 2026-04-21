@@ -98,7 +98,7 @@ export default function LandingPage() {
               Become a <br />
               <span className="text-primary italic underline decoration-black decoration-[8px] underline-offset-[16px]">Cuemath Tutor.</span>
             </h1>
-            <p className="text-xl md:text-2xl font-sans text-black/70 mb-14 max-w-2xl mx-auto leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl font-serif italic text-black/80 mb-14 max-w-2xl mx-auto leading-relaxed">
               Transform lives. Teach math. Join the world's elite educators.
             </p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center">
