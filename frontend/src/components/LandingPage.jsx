@@ -84,27 +84,27 @@ export default function LandingPage() {
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-cream z-10"></div>
         
-        <div className="max-w-7xl mx-auto px-8 relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-8 relative z-20 w-full text-center">
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="max-w-3xl"
+            className="max-w-4xl mx-auto"
           >
-            <span className="inline-block text-[10px] font-black text-black uppercase tracking-[0.5em] mb-6 bg-yellow-400 px-4 py-2">
+            <span className="inline-block text-[10px] font-black text-black uppercase tracking-[0.5em] mb-8 bg-yellow-400 px-6 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
               Teaching DNA Simulation
             </span>
-            <h1 className="text-6xl md:text-8xl font-serif font-bold text-black leading-[1.1] mb-8 drop-shadow-sm">
+            <h1 className="text-6xl md:text-8xl font-serif font-bold text-black leading-[1.1] mb-10 drop-shadow-sm">
               Become a <br />
               <span className="text-primary italic underline decoration-black decoration-[8px] underline-offset-[16px]">Cuemath Tutor.</span>
             </h1>
-            <p className="text-xl md:text-2xl font-sans text-black/70 mb-12 max-w-xl leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl font-sans text-black/70 mb-14 max-w-2xl mx-auto leading-relaxed font-medium">
               Transform lives. Teach math. Join the elite network of educators shaping the next generation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex flex-col sm:flex-row gap-8 justify-center">
               <Link
                 to={isSignedIn ? "/topic" : "/signup"}
-                className="bg-black text-white px-10 py-6 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-3"
+                className="bg-black text-white px-12 py-6 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-3 active:scale-95"
               >
                 {isSignedIn ? "Continue Your Journey" : "Apply Now"}
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
