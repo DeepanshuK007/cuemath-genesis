@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { GoogleLogin } from '@react-oauth/google'
+import { API_BASE } from '../services/api'
 
 export default function SignIn() {
   const navigate = useNavigate()
@@ -31,7 +32,7 @@ export default function SignIn() {
     setError('')
 
     try {
-      const response = await fetch('/api/auth/google', {
+      const response = await fetch(`${API_BASE}/auth/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: credentialResponse.credential })
