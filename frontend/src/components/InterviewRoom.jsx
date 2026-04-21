@@ -190,167 +190,117 @@ export default function InterviewRoom() {
   }
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col">
+    <div className="min-h-screen bg-cream flex flex-col font-sans">
       {/* Header */}
-      <header className="bg-white shadow-sm py-2 px-6">
-        <div className="max-w-4xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <img src="/cuemath-logo-v2.png" alt="Cuemath Logo" className="h-8 w-auto" />
-            <span className="font-sans text-[10px] text-black font-bold ml-1 tracking-tight">GENESIS</span>
-            <span className="font-sans font-bold text-gray-800 ml-2">Live Interview</span>
+      <header className="bg-white border-b border-gray-100 py-3 px-6">
+        <div className="max-w-5xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <img src="/cuemath-logo-v2.png" alt="Cuemath" className="h-6 w-auto" />
+            <div className="h-4 w-[1px] bg-gray-300"></div>
+            <span className="text-[10px] font-black tracking-widest text-black uppercase">Genesis</span>
           </div>
           <button
             onClick={handleEndInterview}
-            className="text-gray-500 hover:bg-black hover:text-white px-4 py-2 rounded-lg transition-all duration-300 font-sans text-sm"
+            className="border border-black px-4 py-1.5 hover:bg-black hover:text-white transition-all text-[10px] font-black uppercase tracking-widest"
           >
-            End Interview
+            End Session
           </button>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 max-w-4xl mx-auto w-full p-6 flex flex-col">
-        {/* Error Display */}
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 font-sans text-sm">
-            {error}
+      <main className="flex-1 max-w-5xl mx-auto w-full grid md:grid-cols-[300px_1fr] gap-8 p-8">
+        {/* Left Sidebar: Context */}
+        <aside className="space-y-6">
+          <div className="border border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <span className="text-[9px] font-black text-primary uppercase tracking-widest block mb-2">Active Topic</span>
+            <h2 className="text-xl font-serif font-bold text-black mb-3">{topic?.title}</h2>
+            <p className="text-xs text-gray-500 leading-relaxed">{topic?.description}</p>
           </div>
-        )}
 
-        {/* Stage Indicator */}
-        <div className="bg-white rounded-xl p-4 mb-6 shadow-md hover:shadow-xl transition-shadow duration-300">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-sans font-medium text-gray-500">
-              Stage {stage !== 'intro' && stage !== 'end' ? stage.charAt(0).toUpperCase() + stage.slice(1) : ''}
-            </span>
-            {isRecording && (
-              <span className="flex items-center gap-2 text-red-500 text-sm font-sans">
-                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                Recording...
-              </span>
-            )}
-            {isTranscribing && (
-              <span className="flex items-center gap-2 text-blue-500 text-sm font-sans">
-                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                Transcribing...
-              </span>
-            )}
+          <div className="border border-black bg-gray-50 p-6">
+             <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-2">Stage</span>
+             <p className="text-xs font-bold text-black uppercase tracking-tight">
+                {stage === 'intro' ? 'Introduction' : stage.replace('_', ' ')}
+             </p>
           </div>
-          <p className="text-gray-700 font-sans">{getStageInstructions()}</p>
-        </div>
 
-        {/* Topic Card */}
-        {topic && (
-          <div className="bg-primary/5 rounded-xl p-4 mb-6 border border-primary/20">
-            <p className="text-sm font-sans font-medium text-primary mb-1">Your Topic:</p>
-            <p className="font-sans font-semibold text-gray-900">{topic.title}</p>
-            <p className="text-sm text-gray-600 mt-1">{topic.description}</p>
-          </div>
-        )}
-
-        {/* AI Message Bubble */}
-        {(currentAIMessage || lastAIMessage) && (
-          <div className="bg-white rounded-xl p-4 mb-6 shadow-md hover:shadow-xl transition-shadow duration-300 max-w-[80%]">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-sm">Alex</span>
-              </div>
-              <div className="flex-1">
-                <p className="font-sans text-gray-800">
-                  {currentAIMessage || lastAIMessage}
-                </p>
-                {isAITalking && (
-                  <div className="mt-2 flex gap-1">
-                    <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                    <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+          {flashcards.length > 0 && (
+            <div className="border border-primary/20 bg-primary/5 p-6 animate-fade-in">
+              <span className="text-[9px] font-black text-primary uppercase tracking-widest block mb-2">Visual Aids Built</span>
+              <div className="space-y-2">
+                {flashcards.slice(-2).map((card, i) => (
+                  <div key={i} className="text-[10px] font-medium text-primary-dark truncate bg-white/50 px-2 py-1">
+                    {card.type}: {card.front}
                   </div>
-                )}
+                ))}
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </aside>
 
-        {/* Transcript */}
-        {transcript.length > 0 && (
-          <div className="bg-gray-50 rounded-xl p-4 mb-6 max-h-48 overflow-y-auto">
-            <p className="text-sm font-sans font-medium text-gray-500 mb-3">Transcript:</p>
-            <div className="space-y-3">
-              {transcript.map((entry, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <span className={`w-2 h-2 rounded-full mt-2 ${entry.role === 'tutor' ? 'bg-accent' : 'bg-primary'}`}></span>
-                  <p className={`font-sans text-sm ${entry.role === 'tutor' ? 'text-gray-800' : 'text-gray-600'}`}>
-                    {entry.text}
-                  </p>
-                </div>
-              ))}
+        {/* Right Content: Interaction */}
+        <div className="flex flex-col">
+          {error && (
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 text-xs font-bold text-red-700 uppercase tracking-tight">
+              {error}
+            </div>
+          )}
+
+          {/* Alex's Message Area */}
+          <div className="flex-1 flex flex-col items-center justify-center py-12">
+            <div className="relative mb-12">
+               <div className={`w-32 h-32 rounded-none border-2 border-black flex items-center justify-center transition-all duration-500 bg-white ${isAITalking ? 'shadow-[8px_8px_0px_0px_rgba(255,107,74,1)] scale-105' : 'shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'}`}>
+                  <span className="text-4xl">👦</span>
+               </div>
+               {isAITalking && (
+                 <div className="absolute -top-4 -right-4 bg-accent text-white text-[10px] font-black px-2 py-1 uppercase tracking-widest animate-bounce">
+                    Talking...
+                 </div>
+               )}
+            </div>
+
+            <div className="max-w-lg text-center">
+              <p className="text-xl md:text-2xl font-serif font-medium text-black leading-snug mb-8">
+                {currentAIMessage || lastAIMessage || "Waiting for Alex..."}
+              </p>
             </div>
           </div>
-        )}
 
-        {/* Flashcards Generated */}
-        {flashcards.length > 0 && (
-          <div className="bg-green-50 rounded-xl p-4 mb-6 border border-green-200">
-            <p className="text-sm font-sans font-medium text-green-700 mb-2">
-              Flashcards Generated: {flashcards.length}
+          {/* Interaction Bar */}
+          <div className="border-t border-gray-100 pt-12 pb-6 flex flex-col items-center gap-6">
+            <div className="flex items-center gap-4">
+               {stage !== 'end' ? (
+                 <button
+                   onClick={handleStartRecording}
+                   disabled={isAITalking || isTranscribing}
+                   className={`w-24 h-24 rounded-none border-2 border-black flex items-center justify-center transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1 ${
+                     isRecording ? 'bg-red-500' : isTranscribing ? 'bg-blue-500 cursor-wait' : 'bg-primary hover:bg-primary-dark'
+                   } disabled:bg-gray-100 disabled:shadow-none disabled:border-gray-200`}
+                 >
+                   {isRecording ? (
+                     <div className="w-8 h-8 bg-white"></div>
+                   ) : isTranscribing ? (
+                     <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                   ) : (
+                     <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                     </svg>
+                   )}
+                 </button>
+               ) : (
+                 <button
+                   onClick={handleEndInterview}
+                   className="bg-black text-white px-10 py-5 font-black uppercase tracking-widest text-xl shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+                 >
+                   View Final Report
+                 </button>
+               )}
+            </div>
+            
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">
+               {isRecording ? 'Tap to finish' : isTranscribing ? 'Processing...' : 'Click mic to explain'}
             </p>
-            <div className="flex flex-wrap gap-2">
-              {flashcards.map((card, i) => (
-                <span key={i} className="bg-white px-3 py-1 rounded-full text-xs font-sans text-gray-700 border border-green-200">
-                  {card.type}: {card.front.substring(0, 20)}...
-                </span>
-              ))}
-            </div>
           </div>
-        )}
-
-        {/* Spacer */}
-        <div className="flex-1"></div>
-
-        {/* Recording Controls */}
-        <div className="flex flex-col items-center gap-4">
-          {stage !== 'end' && (
-            <button
-              onClick={handleStartRecording}
-              disabled={isAITalking || isTranscribing}
-              className={`w-20 h-20 rounded-full flex items-center justify-center transition shadow-lg ${
-                isRecording
-                  ? 'bg-red-500 animate-pulse'
-                  : isTranscribing
-                  ? 'bg-blue-500 cursor-wait'
-                  : isAITalking
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-primary hover:bg-primary-dark'
-              }`}
-            >
-              {isRecording ? (
-                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <rect x="6" y="6" width="12" height="12" rx="2" />
-                </svg>
-              ) : isTranscribing ? (
-                <svg className="w-8 h-8 text-white animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-              ) : (
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                </svg>
-              )}
-            </button>
-          )}
-
-          {stage === 'end' && (
-            <button
-              onClick={handleEndInterview}
-              className="bg-accent hover:bg-orange-500 text-white px-8 py-4 rounded-full font-sans font-semibold text-lg transition shadow-lg"
-            >
-              View Your Results
-            </button>
-          )}
-
-          <p className="text-sm text-gray-500 font-sans">
-            {isRecording ? 'Tap to stop & transcribe' : isTranscribing ? 'Processing...' : 'Tap to speak'}
-          </p>
         </div>
       </main>
     </div>
