@@ -173,9 +173,16 @@ export default function SignIn() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-black text-white py-5 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 disabled:bg-gray-400 disabled:shadow-none"
+              className="w-full bg-black text-white py-5 font-black uppercase tracking-widest text-lg shadow-[8px_8px_0px_0px_rgba(56,31,240,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 disabled:bg-gray-400 relative overflow-hidden"
             >
-              {isLoading ? 'Wait...' : 'Sign In'}
+              {isLoading ? (
+                <div className="relative z-10 flex items-center justify-center gap-3">
+                  <span className="animate-pulse">Authenticating</span>
+                  <div className="absolute bottom-0 left-0 h-1 bg-primary transition-all duration-[1500ms] ease-out" style={{ width: isLoading ? '100%' : '0%' }}></div>
+                </div>
+              ) : (
+                'Sign In'
+              )}
             </button>
           </form>
 
