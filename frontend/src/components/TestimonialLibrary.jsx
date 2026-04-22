@@ -21,15 +21,15 @@ export default function TestimonialLibrary() {
     setTestimonials([
       {
         id: 1,
-        tutorName: 'Tamanna Kothari',
+        tutorName: 'Priya Sharma',
         topic: 'Explaining fractions to a 9-year-old',
         rating: 4.8,
         views: '1,204',
         trending: true,
-        image: '/images/tamanna.jpeg',
+        image: '/images/priya.jpeg',
         preview: 'She used pizza examples perfectly...',
         fullTranscript: 'So imagine you have a pizza, and you share it with your friend...',
-        cliffhanger: 'The exact phrase Tamanna used to make fractions click instantly...',
+        cliffhanger: 'The exact phrase Priya used to make fractions click instantly...',
       },
       {
         id: 2,
@@ -242,7 +242,7 @@ export default function TestimonialLibrary() {
                   alt={tutorial.tutorName}
                   className={`w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ${
                     tutorial.tutorName === 'Ananya Patel' ? 'object-[50%_20%]' : 
-                    tutorial.tutorName === 'Tamanna Kothari' ? 'object-[50%_35%]' : 
+                    tutorial.tutorName === 'Priya Sharma' ? 'object-[50%_35%]' : 
                     'object-center'
                   }`}
                 />

@@ -6,7 +6,7 @@ const router = Router()
 const testimonials = [
   {
     id: '1',
-    tutorName: 'Tamanna Kothari',
+    tutorName: 'Priya Sharma',
     topic: 'Explaining fractions to a 9-year-old',
     rating: 4.8,
     duration: '5:32',

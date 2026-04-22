@@ -90,7 +90,7 @@ export default function SignupForm() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full px-4 py-4 bg-gray-50 border-2 border-black rounded-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(56,31,240,1)] transition-all outline-none font-sans text-sm"
-                  placeholder="Tamanna Kothari"
+                  placeholder="Priya Sharma"
                 />
               </div>
               <div>
